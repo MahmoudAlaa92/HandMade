@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0" version="26.0.2">
+  <diagram name="Page-1" id="3wA5fkfpWRizwxXgx7CH">
+    <mxGraphModel dx="1042" dy="565" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-1" value="Manage account" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="150" width="100" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-2" value="Oversees purchases" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="310" width="100" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-3" value="Oversees discounts" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="310" width="100" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-4" value="Manage products" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="150" width="100" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-5" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#131313;" vertex="1" parent="1">
+          <mxGeometry x="40" y="170" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-6" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.383;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="j6vdubLtL1e8Cc9ZNygo-5" target="j6vdubLtL1e8Cc9ZNygo-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="80" y="184.5" as="sourcePoint" />
+            <mxPoint x="160" y="184.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-7" value="Login Credentials" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-12" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="290" y="194.5" as="sourcePoint" />
+            <mxPoint x="390" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-13" value="Manage orders" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="150" width="100" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-14" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="490" y="199" as="sourcePoint" />
+            <mxPoint x="590" y="199.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-15" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="639.5" y="240" as="sourcePoint" />
+            <mxPoint x="639.5" y="310.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="639.5" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-16" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="360" as="sourcePoint" />
+            <mxPoint x="500" y="360.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-19" value="Oversees payment process" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="310" width="100" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-20" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="360" as="sourcePoint" />
+            <mxPoint x="310" y="360.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-22" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="30" y="325" width="45" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-23" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#131313;" vertex="1" parent="1">
+          <mxGeometry x="37.5" y="332.5" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j6vdubLtL1e8Cc9ZNygo-24" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="348" as="sourcePoint" />
+            <mxPoint x="75" y="347.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
