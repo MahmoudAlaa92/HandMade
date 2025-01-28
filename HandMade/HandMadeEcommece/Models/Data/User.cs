@@ -1,37 +1,22 @@
-﻿using System;
+﻿using HandMadeEcommece.helper;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class User
+public class User : AppUser
 {
-    public int Id { get; set; }
 
-    public string Name { get; set; } = null!;
-
-    public string? Username { get; set; }
-
-    public string? Image { get; set; }
-
-    public string? Phone { get; set; }
-
-    public string Email { get; set; } = null!;
-
-    public TimeOnly? EmailVerifiedAt { get; set; }
-
-    public string Password { get; set; } = null!;
-
-    public string? RememberToken { get; set; }
-
-    public TimeOnly? CreatedAt { get; set; }
-
-    public TimeOnly? UpdatedAt { get; set; }
-
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
-    public virtual ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();
-
-    public virtual ICollection<UserAddress> UserAddresses { get; set; } = new List<UserAddress>();
-
-    public virtual ICollection<Vendor> Vendors { get; set; } = new List<Vendor>();
+    public ICollection<Cart> Carts { get; set; } = new List<Cart>();
+    public ICollection<Chat> Chats { get; set; } = new List<Chat>();
+    public ICollection<Order> Orders { get; set; } = new List<Order>();
+    public ICollection<UserAddress> UserAddresses { get; set; } = new List<UserAddress>();  
+    public ICollection<WishList> WishLists { get; set; } = new List<WishList>();
+    public ICollection<Product> Products { get; set; }=new List<Product>();
+    public ICollection<UserCoupons> UserCoupons { get; set; } = new List<UserCoupons>();
+    public ICollection<Coupon> Coupons { get; set; } = new List<Coupon>();
+    public ICollection<PaypalSetting> PaypalSettings { get; set; } = new List<PaypalSetting>();
+    public ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();
+    public ICollection<TransactionMoney> TransactionMoneys { get; set; } = new List<TransactionMoney>();
 }

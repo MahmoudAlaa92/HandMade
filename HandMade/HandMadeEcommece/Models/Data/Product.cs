@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class Product
+public class Product
 {
     public int Id { get; set; }
 
@@ -11,17 +11,14 @@ public partial class Product
 
     public string Slug { get; set; } = null!;
 
-    public string ThumbImage { get; set; } = null!;
+    public byte[] ThumbImage { get; set; }
 
     public int VendorId { get; set; }
-
-    public int? CategoryId { get; set; }
-
-    public int? SubCategoryId { get; set; }
 
     public int? ChildCategoryId { get; set; }
 
     public int BrandId { get; set; }
+    public int CouponId {  get; set; }
 
     public int Qty { get; set; }
 
@@ -37,9 +34,9 @@ public partial class Product
 
     public double? OfferPrice { get; set; }
 
-    public DateOnly? OfferStartDate { get; set; }
+    public DateTime? OfferStartDate { get; set; }
 
-    public DateOnly? OfferEndDate { get; set; }
+    public DateTime? OfferEndDate { get; set; }
 
     public string? ProductType { get; set; }
 
@@ -51,21 +48,23 @@ public partial class Product
 
     public string? SeoDescription { get; set; }
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-    public virtual Category? Category { get; set; }
-
-    public virtual ChildCategory? ChildCategory { get; set; }
-
-    public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
-
-    public virtual ICollection<ProductImageGallery> ProductImageGalleries { get; set; } = new List<ProductImageGallery>();
-
-    public virtual ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();
-
-    public virtual ICollection<ProductVariant> ProductVariants { get; set; } = new List<ProductVariant>();
-
-    public virtual SubCategory? SubCategory { get; set; }
+    public Brand Brand { get; set; } = null!;
+    public Category Category { get; set; } = null!;
+    public ChildCategory ChildCategory { get; set; } = null!;
+    public Coupon Coupon { get; set; } = null!;
+    public ICollection<ProductVariant> ProductVariants { get; set; } = new List<ProductVariant>();
+    public ICollection<ProductImageGallery> ProductImagesGallery { get; set; } = new List<ProductImageGallery>();
+    public ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();
+    public ICollection<WishList> WishList { get; set; } = new List<WishList>();
+    public ICollection<User> Users { get; set; }=new List<User>();
+    public ICollection<AdminProduct> AdminProducts { get; set; } = new List<AdminProduct>();
+    public ICollection<Admin>admins { get; set; } = new List<Admin>();
+    public ICollection<Vendor> Vendors { get; set; } = new List<Vendor>();
+    public ICollection<VendorProduct> VendorProducts { get; set; } = new List<VendorProduct>();
+    public ICollection<Order> orders { get; set;} = new List<Order>();
+    public ICollection<OrderProduct> ordersProducts { get; set; } = new List<OrderProduct>();
 }

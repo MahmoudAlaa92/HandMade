@@ -3,21 +3,18 @@ using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class Order
+public class Order
 {
     public int Id { get; set; }
+    public int CompanyDeliveryId {  get; set; }
 
-    public string InvocieId { get; set; } = null!;
+    public int CartId { get; set; }
 
     public int UserId { get; set; }
 
-    public double SubTotal { get; set; }
-
-    public double Amount { get; set; }
+    public double Amount { get; set; }// Amount from cart
 
     public string CurrencyName { get; set; } = null!;
-
-    public string CurrencyIcon { get; set; } = null!;
 
     public int ProductQty { get; set; }
 
@@ -27,19 +24,22 @@ public partial class Order
 
     public string OrderAddress { get; set; } = null!;
 
-    public string ShppingMethod { get; set; } = null!;
-
-    public string Coupon { get; set; } = null!;
+    public string ShoppingMethod { get; set; } = null!;
 
     public string OrderStatus { get; set; } = null!;
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-    public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
-
-    public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
-
-    public virtual User User { get; set; } = null!;
+    public DeliveryCompany DeliveryCompany { get; set;} = null!;
+    public User user { get; set; } = null!;
+    public TransactionMoney transactionMoney { get; set; } = null!;
+    public Cart Cart { get; set; } = null!;
+    public ICollection<AdminOrder> adminOrders { get; set; } = new List< AdminOrder > ();
+    public ICollection<Admin>admins { get; set; } = new List < Admin > ();
+    public ICollection<OrderVendor> orderVendor { get; set; } = new List<OrderVendor> ();
+    public ICollection<Vendor> vendor { get; set; } = new List<Vendor>();
+    public ICollection<Product> product { get; set; } = new List<Product> ();
+    public ICollection<OrderProduct> orderProduct { get; set; } = new List<OrderProduct>();
 }

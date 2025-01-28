@@ -1,15 +1,18 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class VendorCondition
+public class VendorCondition
 {
     public int Id { get; set; }
 
-    public string Content { get; set; } = null!;
+    public List<string>Content { get; set; } = null!;
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+    public ICollection<Admin>admins = new List<Admin>();
+    public ICollection<AdminVendorConditions> AdminVendorConditions { get; set; } = new List<AdminVendorConditions>();
 }

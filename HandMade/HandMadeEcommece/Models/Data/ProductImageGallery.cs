@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class ProductImageGallery
+public class ProductImageGallery
 {
     public int Id { get; set; }
 
-    public string Image { get; set; } = null!;
+    public byte[] Image { get; set; }
 
     public int ProductId { get; set; }
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-    public virtual Product Product { get; set; } = null!;
+    public Product Product { get; set; } = null!;
 }

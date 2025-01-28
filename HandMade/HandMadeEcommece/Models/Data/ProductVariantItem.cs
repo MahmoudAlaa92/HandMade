@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class ProductVariantItem
+public class ProductVariantItem
 {
     public int Id { get; set; }
 
@@ -17,9 +17,10 @@ public partial class ProductVariantItem
 
     public int Status { get; set; }
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-    public virtual ProductVariant ProductVariant { get; set; } = null!;
+    public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+    public ProductVariant ProductVariant { get; set; } = null!;
 }

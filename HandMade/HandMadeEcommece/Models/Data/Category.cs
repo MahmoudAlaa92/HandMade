@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class Category
+public class Category
 {
     public int Id { get; set; }
 
@@ -11,17 +11,15 @@ public partial class Category
 
     public string Slug { get; set; } = null!;
 
-    public string Icon { get; set; } = null!;
+    public byte[]? Icon { get; set; }
 
     public int Status { get; set; }
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-    public virtual ICollection<ChildCategory> ChildCategories { get; set; } = new List<ChildCategory>();
-
-    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
-
-    public virtual ICollection<SubCategory> SubCategories { get; set; } = new List<SubCategory>();
+    public ICollection<SubCategory> SubCategories { get; set; } = new List<SubCategory>();
+    public ICollection<Admin>admins { get; set; } = new List<Admin>();  
+    public ICollection<AdminCategory> categories { get; set; } = new List<AdminCategory>();
 }

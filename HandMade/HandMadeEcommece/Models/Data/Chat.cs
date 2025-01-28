@@ -3,19 +3,21 @@ using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class Chat
+public class Chat
 {
     public int Id { get; set; }
 
-    public int SenderId { get; set; }
+    public int UserId { get; set; }
 
-    public int ReceiverId { get; set; }
+    public int VendorId { get; set; }
 
     public string Message { get; set; } = null!;
 
     public int Seen { get; set; }
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+    public User User { get; set; } = null!;
+    public Vendor Vendor { get; set; } = null!;
 }

@@ -3,9 +3,13 @@ using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class PaypalSetting
+public class PaypalSetting
 {
     public int Id { get; set; }
+    public int AccountId {  get; set; }//from user
+    public int VendorId { get; set; }
+    public int UserId { get; set; }
+    public int CompanyDeliveryId {  get; set; }
 
     public int Status { get; set; }
 
@@ -17,11 +21,12 @@ public partial class PaypalSetting
 
     public double CurrencyRate { get; set; }
 
-    public string ClientId { get; set; } = null!;
-
     public string SecretKey { get; set; } = null!;
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+    public User User { get; set; } = null!;
+    public DeliveryCompany DeliveryCompany { get; set; } = null!;
+    public Vendor Vendor { get; set; } = null!;
 }

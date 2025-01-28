@@ -1,13 +1,14 @@
-﻿using System;
+﻿using HandMadeEcommece.Models.Data;
+using System;
 using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models;
 
-public partial class Brand
+public class Brand
 {
     public int Id { get; set; }
 
-    public string Logo { get; set; } = null!;
+    public byte[] Logo { get; set; } = null!;
 
     public string Name { get; set; } = null!;
 
@@ -15,7 +16,11 @@ public partial class Brand
 
     public string Status { get; set; } = null!;
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+
+    public ICollection<Product> products { get; set; } = new List<Product>();
+    public ICollection<Admin> admins { get; set; } = new List<Admin>();
+    public ICollection<AdminBrand>adminBrands { get; set; } = new List<AdminBrand>();
 }

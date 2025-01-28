@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HandMadeEcommece.Models.Data;
 
-public partial class PusherSetting
+public class PusherSetting
 {
     public int Id { get; set; }
 
@@ -15,7 +15,7 @@ public partial class PusherSetting
 
     public string PusherCluster { get; set; } = null!;
 
-    public TimeOnly? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public TimeOnly? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HandMadeEcommece")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9115492232401935c42ddde0f4ac0b0bf0b0c08d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("HandMadeEcommece")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HandMadeEcommece")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
