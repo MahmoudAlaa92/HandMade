@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\1234.jpg",
+      "PackagePath": "staticwebassets\\images\\productsImgs\\1234.jpg"
+    },
+    {
+      "Id": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\FB_IMG_1665605041374.jpg",
+      "PackagePath": "staticwebassets\\images\\productsImgs\\FB_IMG_1665605041374.jpg"
+    },
+    {
+      "Id": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\Screenshot (3).png",
+      "PackagePath": "staticwebassets\\images\\productsImgs\\Screenshot (3).png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.HandMadeEcommece.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.HandMadeEcommece.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.HandMadeEcommece.props",
+      "PackagePath": "build\\HandMadeEcommece.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.HandMadeEcommece.props",
+      "PackagePath": "buildMultiTargeting\\HandMadeEcommece.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.HandMadeEcommece.props",
+      "PackagePath": "buildTransitive\\HandMadeEcommece.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

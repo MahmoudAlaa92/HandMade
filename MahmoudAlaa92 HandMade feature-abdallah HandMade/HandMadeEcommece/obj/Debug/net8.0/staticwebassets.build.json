@@ -1,0 +1,331 @@
+{
+  "Version": 1,
+  "Hash": "hisjp2yIK6WhBXoBlG0bmj7AY9IkxWaN1ETNqTpfAXQ=",
+  "Source": "HandMadeEcommece",
+  "BasePath": "_content/HandMadeEcommece",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "HandMadeEcommece\\wwwroot",
+      "Source": "HandMadeEcommece",
+      "ContentRoot": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\",
+      "BasePath": "_content/HandMadeEcommece",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\1234.jpg",
+      "SourceId": "HandMadeEcommece",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\",
+      "BasePath": "_content/HandMadeEcommece",
+      "RelativePath": "images/productsImgs/1234#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yghroa0442",
+      "Integrity": "MhF6IVRhAspmBjv/rtHYdlsIwbfBJ04K1ouHbUoG8RY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productsImgs\\1234.jpg"
+    },
+    {
+      "Identity": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\FB_IMG_1665605041374.jpg",
+      "SourceId": "HandMadeEcommece",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\",
+      "BasePath": "_content/HandMadeEcommece",
+      "RelativePath": "images/productsImgs/FB_IMG_1665605041374#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "au3r2z1t1z",
+      "Integrity": "Mkr0TcS/wAdQee0okTLn5eykDF+p49Rq88fl7vSdw18=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productsImgs\\FB_IMG_1665605041374.jpg"
+    },
+    {
+      "Identity": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\Screenshot (3).png",
+      "SourceId": "HandMadeEcommece",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\",
+      "BasePath": "_content/HandMadeEcommece",
+      "RelativePath": "images/productsImgs/Screenshot (3)#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4b044sh6ca",
+      "Integrity": "kN6s63bL0SgUUeKuflHBTN/ObPTdAGVCVhROO5f3Ro4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\productsImgs\\Screenshot (3).png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "images/productsImgs/1234.jpg",
+      "AssetFile": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\1234.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "34243"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MhF6IVRhAspmBjv/rtHYdlsIwbfBJ04K1ouHbUoG8RY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Feb 2025 01:46:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MhF6IVRhAspmBjv/rtHYdlsIwbfBJ04K1ouHbUoG8RY="
+        }
+      ]
+    },
+    {
+      "Route": "images/productsImgs/1234.yghroa0442.jpg",
+      "AssetFile": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\1234.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "34243"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MhF6IVRhAspmBjv/rtHYdlsIwbfBJ04K1ouHbUoG8RY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Feb 2025 01:46:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yghroa0442"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productsImgs/1234.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MhF6IVRhAspmBjv/rtHYdlsIwbfBJ04K1ouHbUoG8RY="
+        }
+      ]
+    },
+    {
+      "Route": "images/productsImgs/FB_IMG_1665605041374.au3r2z1t1z.jpg",
+      "AssetFile": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\FB_IMG_1665605041374.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20785"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Mkr0TcS/wAdQee0okTLn5eykDF+p49Rq88fl7vSdw18=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Feb 2025 13:07:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "au3r2z1t1z"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productsImgs/FB_IMG_1665605041374.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Mkr0TcS/wAdQee0okTLn5eykDF+p49Rq88fl7vSdw18="
+        }
+      ]
+    },
+    {
+      "Route": "images/productsImgs/FB_IMG_1665605041374.jpg",
+      "AssetFile": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\FB_IMG_1665605041374.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20785"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Mkr0TcS/wAdQee0okTLn5eykDF+p49Rq88fl7vSdw18=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Feb 2025 13:07:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Mkr0TcS/wAdQee0okTLn5eykDF+p49Rq88fl7vSdw18="
+        }
+      ]
+    },
+    {
+      "Route": "images/productsImgs/Screenshot (3).4b044sh6ca.png",
+      "AssetFile": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\Screenshot (3).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "247682"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kN6s63bL0SgUUeKuflHBTN/ObPTdAGVCVhROO5f3Ro4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Feb 2025 01:41:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4b044sh6ca"
+        },
+        {
+          "Name": "label",
+          "Value": "images/productsImgs/Screenshot (3).png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kN6s63bL0SgUUeKuflHBTN/ObPTdAGVCVhROO5f3Ro4="
+        }
+      ]
+    },
+    {
+      "Route": "images/productsImgs/Screenshot (3).png",
+      "AssetFile": "E:\\Prog_langs\\graduation\\MahmoudAlaa92 HandMade feature-abdallah HandMade\\HandMadeEcommece\\wwwroot\\images\\productsImgs\\Screenshot (3).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "247682"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kN6s63bL0SgUUeKuflHBTN/ObPTdAGVCVhROO5f3Ro4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Feb 2025 01:41:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kN6s63bL0SgUUeKuflHBTN/ObPTdAGVCVhROO5f3Ro4="
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+wwwroot\images\productsImgs\1234.jpg
+wwwroot\images\productsImgs\FB_IMG_1665605041374.jpg
+wwwroot\images\productsImgs\Screenshot (3).png
