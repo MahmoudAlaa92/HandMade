@@ -12,7 +12,7 @@ namespace HandMadeEcommece.Models.config
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.Quantity).IsRequired();
             builder.Property(x=>x.Price).IsRequired().HasPrecision(10,2);
-            //builder.Property(x=>x.SubTotal).HasPrecision(10,2);
+            builder.Property(x=>x.SubTotal).IsRequired().HasPrecision(10,2);
 
             builder.HasOne(e => e.cart)
                 .WithMany(e => e.items)

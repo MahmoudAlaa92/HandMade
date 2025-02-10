@@ -89,6 +89,19 @@
           }
         }
       },
+      "libphonenumber-csharp/8.13.54": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/PhoneNumbers.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/PhoneNumbers.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.11": {
         "type": "package",
         "dependencies": {
@@ -1941,6 +1954,25 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "libphonenumber-csharp/8.13.54": {
+      "sha512": "N0wbqgvE02uyaUNvtzhrT6C4QNd/9YsaLlQ7kc9jt4zwr58TT+CL+KmIe90pXI2ERNXeJP/nmwUNYDyAm1dIwA==",
+      "type": "package",
+      "path": "libphonenumber-csharp/8.13.54",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/PhoneNumbers.dll",
+        "lib/net8.0/PhoneNumbers.xml",
+        "lib/net9.0/PhoneNumbers.dll",
+        "lib/net9.0/PhoneNumbers.xml",
+        "lib/netstandard2.0/PhoneNumbers.dll",
+        "lib/netstandard2.0/PhoneNumbers.xml",
+        "libphonenumber-csharp.8.13.54.nupkg.sha512",
+        "libphonenumber-csharp.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.11": {
@@ -5984,7 +6016,8 @@
       "Swashbuckle.AspNetCore >= 7.2.0",
       "System.Linq >= 4.3.0",
       "System.Linq.Dynamic >= 1.0.8",
-      "System.Linq.Dynamic.Core >= 1.5.1"
+      "System.Linq.Dynamic.Core >= 1.5.1",
+      "libphonenumber-csharp >= 8.13.54"
     ]
   },
   "packageFolders": {
@@ -6088,6 +6121,10 @@
           "System.Linq.Dynamic.Core": {
             "target": "Package",
             "version": "[1.5.1, )"
+          },
+          "libphonenumber-csharp": {
+            "target": "Package",
+            "version": "[8.13.54, )"
           }
         },
         "imports": [

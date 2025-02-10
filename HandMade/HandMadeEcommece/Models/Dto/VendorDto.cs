@@ -8,6 +8,9 @@ namespace HandMadeEcommece.Models.Dto
 
         public string FName { get; set; } 
         public string LName { get; set; }
+        [Required]
+
+        public string UserName {  get; set; }
 
         public IFormFile? Image {  get; set; }
 
@@ -15,12 +18,10 @@ namespace HandMadeEcommece.Models.Dto
 
         public string Phone { get; set; } = null!;
 
-        public string Email { get; set; } = null!;
-
-
-        [Compare("Email")]
-
-        public string ConfirmEmail { get; set; } = null!;
+        [Required]
+        [JsonIgnore]
+        public string Password { get; set; }
+ 
 
         //public string Address { get; set; } = null!;
 
@@ -33,8 +34,9 @@ namespace HandMadeEcommece.Models.Dto
         public string? InstaLink { get; set; }
 
         public string? ShopName { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
 
-        public int Status { get; set; }
+        public int Status { get; set; } = 0;
 
     }
 }

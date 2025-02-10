@@ -2,7 +2,7 @@
 {
     public class AdminVendor
     {
-        public int VendorId { get; set; }   
         public int AdminId {  get; set; }
+        public int VendorId { get; set; }   
     }
 }

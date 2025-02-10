@@ -101,6 +101,10 @@
             "System.Linq.Dynamic.Core": {
               "target": "Package",
               "version": "[1.5.1, )"
+            },
+            "libphonenumber-csharp": {
+              "target": "Package",
+              "version": "[8.13.54, )"
             }
           },
           "imports": [

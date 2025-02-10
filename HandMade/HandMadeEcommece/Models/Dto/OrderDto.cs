@@ -4,28 +4,31 @@ namespace HandMadeEcommece.Models.Dto
 {
     public class OrderDto
     {
+        [Required]
 
         public int CompanyDeliveryId { get; set; }
+        [Required]
 
         public int CartId { get; set; }
+        [Required]
 
         public int UserId { get; set; }
+        [Required]
 
-        public double Amount { get; set; }// Amount from cart
+        public decimal Amount { get; set; }// Amount from cart
+        [Required]
 
-        public string CurrencyName { get; set; } = null!;
+        public CurrencyName CurrencyName { get; set; } = CurrencyName.EGP;
 
-        public int ProductQty { get; set; }
+        public int ProductQty { get; set; }// from cartId
+        [Required]
 
-        public string PaymentMethod { get; set; } = null!;
-
-        public int PaymentStatus { get; set; }
+        public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.Paypal;
+        [Required]
 
         public string OrderAddress { get; set; } = null!;
 
-        public string ShoppingMethod { get; set; } = null!;
-
-        public string OrderStatus { get; set; } = null!;
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
 
         public DateTime? CreatedAt { get; set; }
 

@@ -10,23 +10,21 @@ public class Product
     public string Name { get; set; } = null!;
 
     public string Slug { get; set; } = null!;
-
+  
     public byte[] ThumbImage { get; set; }
 
     public int VendorId { get; set; }
 
     public int? ChildCategoryId { get; set; }
 
-    public int BrandId { get; set; }
-    public int CouponId {  get; set; }
+    public int? BrandId { get; set; }
+    public int? CouponId {  get; set; }
 
     public int Qty { get; set; }
 
     public string ShortDescription { get; set; } = null!;
 
     public string LongDescription { get; set; } = null!;
-
-    public string? VideoLink { get; set; }
 
     public string? Sku { get; set; }
 
@@ -39,8 +37,6 @@ public class Product
     public DateTime? OfferEndDate { get; set; }
 
     public string? ProductType { get; set; }
-
-    public int Status { get; set; }
 
     public int IsApproved { get; set; }
 

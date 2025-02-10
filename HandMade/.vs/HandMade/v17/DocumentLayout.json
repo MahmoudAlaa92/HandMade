@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\abdallah mohamed\\Desktop\\HandMade\\HandMade\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{DD648C63-62EC-4307-8B07-05EE7B0C02BC}|HandMadeEcommece\\HandMadeEcommece.csproj|c:\\users\\abdallah mohamed\\desktop\\handmade\\handmade\\handmadeecommece\\controllers\\databasecontrollers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DD648C63-62EC-4307-8B07-05EE7B0C02BC}|HandMadeEcommece\\HandMadeEcommece.csproj|solutionrelative:handmadeecommece\\controllers\\databasecontrollers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DD648C63-62EC-4307-8B07-05EE7B0C02BC}|HandMadeEcommece\\HandMadeEcommece.csproj|c:\\users\\abdallah mohamed\\desktop\\handmade\\handmade\\handmadeecommece\\controllers\\generscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DD648C63-62EC-4307-8B07-05EE7B0C02BC}|HandMadeEcommece\\HandMadeEcommece.csproj|solutionrelative:handmadeecommece\\controllers\\generscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,37 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GenersController.cs",
-              "DocumentMoniker": "C:\\Users\\abdallah mohamed\\Desktop\\HandMade\\HandMade\\HandMadeEcommece\\Controllers\\GenersController.cs",
-              "RelativeDocumentMoniker": "HandMadeEcommece\\Controllers\\GenersController.cs",
-              "ToolTip": "C:\\Users\\abdallah mohamed\\Desktop\\HandMade\\HandMade\\HandMadeEcommece\\Controllers\\GenersController.cs",
-              "RelativeToolTip": "HandMadeEcommece\\Controllers\\GenersController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAuwCIAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-28T16:34:28.407Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OrdersController.cs",
-              "DocumentMoniker": "C:\\Users\\abdallah mohamed\\Desktop\\HandMade\\HandMade\\HandMadeEcommece\\Controllers\\DatabaseControllers\\OrdersController.cs",
-              "RelativeDocumentMoniker": "HandMadeEcommece\\Controllers\\DatabaseControllers\\OrdersController.cs",
-              "ToolTip": "C:\\Users\\abdallah mohamed\\Desktop\\HandMade\\HandMade\\HandMadeEcommece\\Controllers\\DatabaseControllers\\OrdersController.cs",
-              "RelativeToolTip": "HandMadeEcommece\\Controllers\\DatabaseControllers\\OrdersController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAADwvx4AAABDAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-28T16:34:25.705Z",
-              "EditorCaption": ""
             }
           ]
         }

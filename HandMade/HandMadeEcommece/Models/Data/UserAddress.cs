@@ -8,8 +8,6 @@ public class UserAddress
     public int Id { get; set; }
 
     public int UserId { get; set; }
-    public int VendorId {  get; set; }  
-    public int AdminId {  get; set; }
 
     public string Country { get; set; } = null!;
 
@@ -26,6 +24,4 @@ public class UserAddress
     public DateTime? UpdatedAt { get; set; }
 
     public User User { get; set; } = null!;
-    public Vendor Vendor { get; set; } = null!;
-    public Admin Admin { get; set; } = null!;
 }

@@ -1,4 +1,6 @@
-﻿namespace HandMadeEcommece.Models.Data
+﻿using Microsoft.AspNetCore.Http.Features;
+
+namespace HandMadeEcommece.Models.Data
 {
     public class Cart
     {

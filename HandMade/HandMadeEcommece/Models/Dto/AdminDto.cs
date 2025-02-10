@@ -1,24 +1,20 @@
-﻿
-
-namespace HandMadeEcommece.Models.Dto
+﻿namespace HandMadeEcommece.Models.Dto
 {
     public class AdminDto
     {
+        public string FName { get; set; } = null!;
+        public string LName { get; set; } = null!;
+        [Required]
+
+        public string UserName { get; set; }
+
         public IFormFile? image { get; set; }
-        public string FName { get; set; }
-        public string LName { get; set; }
 
-        public string? UserName { get; set; }
+        public string? Phone { get; set; }
+        [Required]
 
-        public string Password { get; set; }
+        public string Password { get; set; } = null!;
 
-        public string Email { get; set; }
-
-        [Compare("Email")]
-        public string ConfirmEmail {  get; set; }
-
-        public string Phone { get; set; }
-
-
+        public double Salary {  get; set; }
     }
 }

@@ -5,9 +5,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HandMadeEcommece.Models.Data;
 
-public class User : AppUser
+public class User 
 {
+    public int Id {  get; set; }
+    public int RoleId {  get; set; }
+    public byte[]? Image { get; set; }
+    public string FName { get; set; } = null!;
+    public string LName { get; set; } = null!;
+    public string UserName { get; set; } = null!;
+    public string Password { get; set; } = null!;
 
+    public string Phone { get; set; } = null!;
+
+    public string Email { get; set; } = null!;
+
+    public Role Role { get; set; } = null!;
+    public ICollection<ClaimUser> Claims { get; set; } = new List<ClaimUser>();
     public ICollection<Cart> Carts { get; set; } = new List<Cart>();
     public ICollection<Chat> Chats { get; set; } = new List<Chat>();
     public ICollection<Order> Orders { get; set; } = new List<Order>();

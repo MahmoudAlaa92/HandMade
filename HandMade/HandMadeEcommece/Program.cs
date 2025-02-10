@@ -36,7 +36,9 @@ builder.Services.AddCors(Options =>
     });
 });
 
-builder.Services.AddIdentity<AppUser,RoleUser>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
 //ensure the saved data in token is same
 builder.Services.AddAuthentication(option =>

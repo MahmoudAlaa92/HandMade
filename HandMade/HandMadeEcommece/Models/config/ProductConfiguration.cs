@@ -23,7 +23,6 @@ namespace HandMadeEcommece.Models.config
             builder.Property(x => x.OfferStartDate).HasColumnType("DATETIME");
             builder.Property(x => x.OfferEndDate).HasColumnType("DATETIME");
             builder.Property(x => x.ProductType).HasColumnType("VARCHAR").HasMaxLength(255);
-            builder.Property(x => x.Status);
             builder.Property(x=>x.IsApproved);
             builder.Property(x=>x.SeoDescription).IsRequired().HasColumnType("VARCHAR").HasMaxLength(255);
             builder.Property(x => x.SeoTitle).IsRequired().HasColumnType("VARCHAR").HasMaxLength(255);

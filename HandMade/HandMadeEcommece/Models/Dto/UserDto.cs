@@ -8,19 +8,17 @@ namespace HandMadeEcommece.Models.Dto
 
         public string FName { get; set; } = null!;
         public string LName { get; set; } = null!;
+        [Required]
 
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         public IFormFile? image { get; set; }
 
         public string? Phone { get; set; }
-
-        public string Email { get; set; } = null!;
-
-        [Compare("Email")]
-        public string ConfirmEmail { get; set; } = null!;
+        [Required]
+        [JsonIgnore]
 
         public string Password { get; set; } = null!;
-
+   
     }
 }

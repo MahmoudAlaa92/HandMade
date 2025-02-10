@@ -17,7 +17,7 @@ public class PaypalSetting
 
     public string CountryName { get; set; } = null!;
 
-    public string CurrencyName { get; set; } = null!;
+    public CurrencyName CurrencyName { get; set; } = CurrencyName.EGP;
 
     public double CurrencyRate { get; set; }
 

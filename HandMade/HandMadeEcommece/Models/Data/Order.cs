@@ -12,7 +12,7 @@ public class Order
 
     public int UserId { get; set; }
 
-    public double Amount { get; set; }// Amount from cart
+    public decimal Amount { get; set; }// Amount from cart
 
     public string CurrencyName { get; set; } = null!;
 
@@ -20,11 +20,7 @@ public class Order
 
     public string PaymentMethod { get; set; } = null!;
 
-    public int PaymentStatus { get; set; }
-
     public string OrderAddress { get; set; } = null!;
-
-    public string ShoppingMethod { get; set; } = null!;
 
     public string OrderStatus { get; set; } = null!;
 

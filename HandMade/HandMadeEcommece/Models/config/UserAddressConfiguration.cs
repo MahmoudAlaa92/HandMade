@@ -22,16 +22,6 @@ namespace HandMadeEcommece.Models.config
                 .WithMany(e => e.UserAddresses)
                 .HasForeignKey(e => e.UserId)
                 .IsRequired(false);
-
-            builder.HasOne(e=>e.Admin)
-                .WithMany(e=>e.addresses)
-                .HasForeignKey(e => e.AdminId)
-                .IsRequired(false);
-
-            builder.HasOne(e=>e.Vendor)
-                .WithMany(e=>e.UserAddresses)
-                .HasForeignKey(e=>e.VendorId)
-                .IsRequired(false);
         }
     }
 }

@@ -1,13 +1,26 @@
 ﻿using HandMadeEcommece.helper;
 using System.ComponentModel.DataAnnotations;
+using System.Numerics;
 using System.Xml;
 
 namespace HandMadeEcommece.Models.Data
 {
-    public class Admin : AppUser
+    public class Admin
     {
+        public int Id { get; set; }
+        public int RoleId {  get; set; }
+        public byte[]? Image { get; set; }
+        public string FName { get; set; } = null!;
+        public string LName { get; set; } = null!;
+        public string UserName { get; set; } = null!;
+        public string Password { get; set; } = null!;
 
+        public string Phone { get; set; } = null!;
+
+        public string Email { get; set; } = null!;
         public decimal Salary { get; set; }
+        public Role Role { get; set; } = null!;
+        public ICollection<ClaimAdmin> claims { get; set; } = new List<ClaimAdmin>();
         public ICollection<Brand> brands { get; set; } = new List<Brand>();
         public ICollection<AdminBrand> adminBrands { get; set; } = new List<AdminBrand>();
         public ICollection<Category> categories { get; set; } = new List<Category>();

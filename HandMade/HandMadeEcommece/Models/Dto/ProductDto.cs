@@ -4,29 +4,38 @@ namespace HandMadeEcommece.Models.Dto
 {
     public class ProductDto
     {
-
+        [Required]
         public string Name { get; set; } = null!;
+        [Required]
 
         public string Slug { get; set; } = null!;
+        [Required]
 
-        public IFormFile ThumbImage { get; set; } = null!;
+        public IFormFile ThumbImage { get; set; }
+        [Required] //must be required 
 
         public int VendorId { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 
         public int? ChildCategoryId { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 
-        public int BrandId { get; set; }
-        public int CouponId { get; set; }
+        public int? BrandId { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+
+        public int? CouponId { get; set; }
+        [Required]
 
         public int Qty { get; set; }
+        [Required]
 
         public string ShortDescription { get; set; } = null!;
+        [Required]
 
         public string LongDescription { get; set; } = null!;
 
-        public string? VideoLink { get; set; }
-
         public string? Sku { get; set; }
+        [Required]
 
         public double Price { get; set; }
 
@@ -37,8 +46,7 @@ namespace HandMadeEcommece.Models.Dto
         public DateTime? OfferEndDate { get; set; }
 
         public string? ProductType { get; set; }
-
-        public int Status { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 
         public int IsApproved { get; set; }
 

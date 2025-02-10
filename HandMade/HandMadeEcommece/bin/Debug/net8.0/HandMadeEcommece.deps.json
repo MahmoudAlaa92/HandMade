@@ -19,7 +19,8 @@
           "Swashbuckle.AspNetCore": "7.2.0",
           "System.Linq": "4.3.0",
           "System.Linq.Dynamic": "1.0.8",
-          "System.Linq.Dynamic.Core": "1.5.1"
+          "System.Linq.Dynamic.Core": "1.5.1",
+          "libphonenumber-csharp": "8.13.54"
         },
         "runtime": {
           "HandMadeEcommece.dll": {}
@@ -88,6 +89,14 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "libphonenumber-csharp/8.13.54": {
+        "runtime": {
+          "lib/net8.0/PhoneNumbers.dll": {
+            "assemblyVersion": "8.13.54.0",
+            "fileVersion": "8.13.54.0"
           }
         }
       },
@@ -1252,6 +1261,13 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "libphonenumber-csharp/8.13.54": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-N0wbqgvE02uyaUNvtzhrT6C4QNd/9YsaLlQ7kc9jt4zwr58TT+CL+KmIe90pXI2ERNXeJP/nmwUNYDyAm1dIwA==",
+      "path": "libphonenumber-csharp/8.13.54",
+      "hashPath": "libphonenumber-csharp.8.13.54.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.11": {
       "type": "package",

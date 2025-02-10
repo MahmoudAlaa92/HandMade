@@ -60,6 +60,101 @@ namespace HandMadeEcommece.Migrations
                     b.ToTable("Brands");
                 });
 
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("FName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("LName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Salary")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Admins");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.AdminAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AdminId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Zip")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
+
+                    b.ToTable("AdminAddresses");
+                });
+
             modelBuilder.Entity("HandMadeEcommece.Models.Data.AdminBrand", b =>
                 {
                     b.Property<int>("AdminId")
@@ -87,7 +182,7 @@ namespace HandMadeEcommece.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("AdminCategory");
+                    b.ToTable("AdminCategories");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.AdminOrder", b =>
@@ -147,7 +242,7 @@ namespace HandMadeEcommece.Migrations
 
                     b.HasIndex("VendorId");
 
-                    b.ToTable("AdminVendorOrders");
+                    b.ToTable("AdminVendors");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.AdminVendorConditions", b =>
@@ -216,6 +311,10 @@ namespace HandMadeEcommece.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
@@ -298,6 +397,19 @@ namespace HandMadeEcommece.Migrations
                     b.ToTable("Chats");
                 });
 
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.CheckUserNameAndEmail", b =>
+                {
+                    b.Property<string>("UserName")
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("VARCHAR");
+
+                    b.HasKey("UserName", "Email");
+
+                    b.ToTable("checkUserNameAndEmails");
+                });
+
             modelBuilder.Entity("HandMadeEcommece.Models.Data.ChildCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -333,6 +445,118 @@ namespace HandMadeEcommece.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("ChildCategories");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.ClaimAdmin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AdminId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClaimType")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ClaimValue")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
+
+                    b.ToTable("ClaimAdmins");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.ClaimRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ClaimValue")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("ClaimRoles");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.ClaimUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ClaimValue")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ClaimUsers");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.ClaimVendor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ClaimValue")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("ClaimVendors");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.Coupon", b =>
@@ -434,9 +658,9 @@ namespace HandMadeEcommece.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Amount")
+                    b.Property<decimal>("Amount")
                         .HasPrecision(10, 2)
-                        .HasColumnType("float(10)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("CartId")
                         .HasColumnType("int");
@@ -467,16 +691,8 @@ namespace HandMadeEcommece.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<int>("PaymentStatus")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductQty")
                         .HasColumnType("int");
-
-                    b.Property<string>("ShoppingMethod")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("DATETIME");
@@ -596,7 +812,7 @@ namespace HandMadeEcommece.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BrandId")
+                    b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
@@ -605,7 +821,7 @@ namespace HandMadeEcommece.Migrations
                     b.Property<int?>("ChildCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CouponId")
+                    b.Property<int?>("CouponId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -669,9 +885,6 @@ namespace HandMadeEcommece.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<byte[]>("ThumbImage")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
@@ -681,9 +894,6 @@ namespace HandMadeEcommece.Migrations
 
                     b.Property<int>("VendorId")
                         .HasColumnType("int");
-
-                    b.Property<string>("VideoLink")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -709,9 +919,9 @@ namespace HandMadeEcommece.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("DATETIME");
 
-                    b.Property<byte[]>("Image")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -779,9 +989,9 @@ namespace HandMadeEcommece.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("DATETIME");
 
-                    b.Property<byte[]>("Image")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<int>("ProductReviewId")
                         .HasColumnType("int");
@@ -906,6 +1116,24 @@ namespace HandMadeEcommece.Migrations
                     b.ToTable("PusherSettings");
                 });
 
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(225)
+                        .HasColumnType("VARCHAR");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("HandMadeEcommece.Models.Data.SubCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -996,6 +1224,54 @@ namespace HandMadeEcommece.Migrations
                     b.ToTable("Transactions");
                 });
 
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("FName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("LName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("HandMadeEcommece.Models.Data.UserAddress", b =>
                 {
                     b.Property<int>("Id")
@@ -1009,7 +1285,7 @@ namespace HandMadeEcommece.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<int>("AdminId")
+                    b.Property<int?>("AdminId")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -1034,7 +1310,7 @@ namespace HandMadeEcommece.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VendorId")
+                    b.Property<int?>("VendorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Zip")
@@ -1066,6 +1342,126 @@ namespace HandMadeEcommece.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserCoupons");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.Vendor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Banner")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("FName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FbLink")
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("InstaLink")
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("LName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShopName")
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TwLink")
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("VARCHAR");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Vendors");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.VendorAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Zip")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("VendorAddresses");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.VendorCondition", b =>
@@ -1139,281 +1535,26 @@ namespace HandMadeEcommece.Migrations
                     b.ToTable("WishList");
                 });
 
-            modelBuilder.Entity("HandMadeEcommece.helper.AppUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConfirmEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("LName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator().HasValue("AppUser");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("HandMadeEcommece.helper.RoleUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
-
             modelBuilder.Entity("HandMadeEcommece.Models.Data.Admin", b =>
                 {
-                    b.HasBaseType("HandMadeEcommece.helper.AppUser");
+                    b.HasOne("HandMadeEcommece.Models.Data.Role", "Role")
+                        .WithMany("Admins")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Property<decimal>("Salary")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
-
-                    b.HasDiscriminator().HasValue("Admin");
+                    b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("HandMadeEcommece.Models.Data.User", b =>
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.AdminAddress", b =>
                 {
-                    b.HasBaseType("HandMadeEcommece.helper.AppUser");
+                    b.HasOne("HandMadeEcommece.Models.Data.Admin", "Admin")
+                        .WithMany()
+                        .HasForeignKey("AdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasDiscriminator().HasValue("User");
-                });
-
-            modelBuilder.Entity("HandMadeEcommece.Models.Data.Vendor", b =>
-                {
-                    b.HasBaseType("HandMadeEcommece.helper.AppUser");
-
-                    b.Property<string>("Banner")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("FbLink")
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("InstaLink")
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("ShopName")
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("TwLink")
-                        .HasMaxLength(255)
-                        .HasColumnType("VARCHAR");
-
-                    b.HasDiscriminator().HasValue("Vendor");
+                    b.Navigation("Admin");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.AdminBrand", b =>
@@ -1496,7 +1637,7 @@ namespace HandMadeEcommece.Migrations
                     b.HasOne("HandMadeEcommece.Models.Data.Admin", null)
                         .WithMany("adminVendors")
                         .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HandMadeEcommece.Models.Data.Vendor", null)
@@ -1567,6 +1708,50 @@ namespace HandMadeEcommece.Migrations
                         .HasForeignKey("SubCategoryId");
 
                     b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.ClaimAdmin", b =>
+                {
+                    b.HasOne("HandMadeEcommece.Models.Data.Admin", "admin")
+                        .WithMany("claims")
+                        .HasForeignKey("AdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("admin");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.ClaimRole", b =>
+                {
+                    b.HasOne("HandMadeEcommece.Models.Data.Role", "Role")
+                        .WithMany("ClaimRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.ClaimUser", b =>
+                {
+                    b.HasOne("HandMadeEcommece.Models.Data.User", "user")
+                        .WithMany("Claims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.ClaimVendor", b =>
+                {
+                    b.HasOne("HandMadeEcommece.Models.Data.Vendor", "vendor")
+                        .WithMany("claims")
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("vendor");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.Order", b =>
@@ -1753,9 +1938,20 @@ namespace HandMadeEcommece.Migrations
                     b.Navigation("user");
                 });
 
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.User", b =>
+                {
+                    b.HasOne("HandMadeEcommece.Models.Data.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("HandMadeEcommece.Models.Data.UserAddress", b =>
                 {
-                    b.HasOne("HandMadeEcommece.Models.Data.Admin", "Admin")
+                    b.HasOne("HandMadeEcommece.Models.Data.Admin", null)
                         .WithMany("addresses")
                         .HasForeignKey("AdminId");
 
@@ -1763,15 +1959,11 @@ namespace HandMadeEcommece.Migrations
                         .WithMany("UserAddresses")
                         .HasForeignKey("UserId");
 
-                    b.HasOne("HandMadeEcommece.Models.Data.Vendor", "Vendor")
+                    b.HasOne("HandMadeEcommece.Models.Data.Vendor", null)
                         .WithMany("UserAddresses")
                         .HasForeignKey("VendorId");
 
-                    b.Navigation("Admin");
-
                     b.Navigation("User");
-
-                    b.Navigation("Vendor");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.UserCoupons", b =>
@@ -1787,6 +1979,28 @@ namespace HandMadeEcommece.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.Vendor", b =>
+                {
+                    b.HasOne("HandMadeEcommece.Models.Data.Role", "Role")
+                        .WithMany("Vendors")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.VendorAddress", b =>
+                {
+                    b.HasOne("HandMadeEcommece.Models.Data.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vendor");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.VendorProduct", b =>
@@ -1834,62 +2048,32 @@ namespace HandMadeEcommece.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.HasOne("HandMadeEcommece.helper.RoleUser", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.HasOne("HandMadeEcommece.helper.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
-                {
-                    b.HasOne("HandMadeEcommece.helper.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.HasOne("HandMadeEcommece.helper.RoleUser", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HandMadeEcommece.helper.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
-                {
-                    b.HasOne("HandMadeEcommece.helper.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HandMadeEcommece.Models.Brand", b =>
                 {
                     b.Navigation("adminBrands");
 
                     b.Navigation("products");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.Admin", b =>
+                {
+                    b.Navigation("addresses");
+
+                    b.Navigation("adminBrands");
+
+                    b.Navigation("adminCategories");
+
+                    b.Navigation("adminProducts");
+
+                    b.Navigation("adminTransactions");
+
+                    b.Navigation("adminVendorConditions");
+
+                    b.Navigation("adminVendors");
+
+                    b.Navigation("adminsOrders");
+
+                    b.Navigation("claims");
                 });
 
             modelBuilder.Entity("HandMadeEcommece.Models.Data.Cart", b =>
@@ -1972,6 +2156,17 @@ namespace HandMadeEcommece.Migrations
                     b.Navigation("CartItems");
                 });
 
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.Role", b =>
+                {
+                    b.Navigation("Admins");
+
+                    b.Navigation("ClaimRoles");
+
+                    b.Navigation("Users");
+
+                    b.Navigation("Vendors");
+                });
+
             modelBuilder.Entity("HandMadeEcommece.Models.Data.SubCategory", b =>
                 {
                     b.Navigation("ChildCategories");
@@ -1984,35 +2179,13 @@ namespace HandMadeEcommece.Migrations
                     b.Navigation("vendorTransactions");
                 });
 
-            modelBuilder.Entity("HandMadeEcommece.Models.Data.VendorCondition", b =>
-                {
-                    b.Navigation("AdminVendorConditions");
-                });
-
-            modelBuilder.Entity("HandMadeEcommece.Models.Data.Admin", b =>
-                {
-                    b.Navigation("addresses");
-
-                    b.Navigation("adminBrands");
-
-                    b.Navigation("adminCategories");
-
-                    b.Navigation("adminProducts");
-
-                    b.Navigation("adminTransactions");
-
-                    b.Navigation("adminVendorConditions");
-
-                    b.Navigation("adminVendors");
-
-                    b.Navigation("adminsOrders");
-                });
-
             modelBuilder.Entity("HandMadeEcommece.Models.Data.User", b =>
                 {
                     b.Navigation("Carts");
 
                     b.Navigation("Chats");
+
+                    b.Navigation("Claims");
 
                     b.Navigation("Orders");
 
@@ -2037,6 +2210,8 @@ namespace HandMadeEcommece.Migrations
 
                     b.Navigation("adminsVendor");
 
+                    b.Navigation("claims");
+
                     b.Navigation("orderVendor");
 
                     b.Navigation("paypalSettings");
@@ -2044,6 +2219,11 @@ namespace HandMadeEcommece.Migrations
                     b.Navigation("vendorProducts");
 
                     b.Navigation("vendorTransactions");
+                });
+
+            modelBuilder.Entity("HandMadeEcommece.Models.Data.VendorCondition", b =>
+                {
+                    b.Navigation("AdminVendorConditions");
                 });
 #pragma warning restore 612, 618
         }

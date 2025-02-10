@@ -15,13 +15,13 @@ namespace HandMadeEcommece.Controllers.AuthControllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult>RegisterUser([FromForm]RegisterUserModel model)
+        public async Task<IActionResult> RegisterUser([FromForm] RegisterUserModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            
+
             var result = await _auth.RegisterUserAsync(model);
-            if(!result.IsAuthenticated)
+            if (!result.IsAuthenticated)
                 return BadRequest(result.Message);
 
             return Ok(result);
@@ -29,7 +29,7 @@ namespace HandMadeEcommece.Controllers.AuthControllers
 
 
         [HttpPost("LogIn")]
-        public async Task<IActionResult>LogInUser(LogInUserModel model)
+        public async Task<IActionResult> LogInUser(LogInUserModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

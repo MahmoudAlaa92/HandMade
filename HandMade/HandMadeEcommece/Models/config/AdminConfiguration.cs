@@ -9,9 +9,18 @@ namespace HandMadeEcommece.Models.config
     {
         public void Configure(EntityTypeBuilder<Admin> builder)
         {
-            
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Property(x => x.Password).IsRequired().HasMaxLength(255).HasColumnType("VARCHAR");
+            builder.Property(x => x.Email).IsRequired().HasMaxLength(255).HasColumnType("VARCHAR");
+            builder.Property(x => x.UserName).IsRequired().HasMaxLength(255).HasColumnType("VARCHAR");
             builder.Property(e=>e.Salary).HasPrecision(10,2).IsRequired();
             //image
+
+            builder.HasOne(e => e.Role)
+                .WithMany(e => e.Admins)
+                .HasForeignKey(e => e.RoleId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(e => e.orders)
                 .WithMany(e => e.admins)

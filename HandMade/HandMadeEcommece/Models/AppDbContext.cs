@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using HandMadeEcommece.Controllers.DatabaseControllers;
 using HandMadeEcommece.helper;
 using HandMadeEcommece.Models.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace HandMadeEcommece.Models;
 
-public partial class AppDbContext : IdentityDbContext<AppUser,RoleUser,int>
+public class AppDbContext : DbContext
 {
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
@@ -14,13 +16,24 @@ public partial class AppDbContext : IdentityDbContext<AppUser,RoleUser,int>
     {
     }
 
+   
+
     public DbSet<Admin>Admins { get; set; }
     public DbSet<AdminBrand>AdminBrands { get; set; }
     public DbSet<AdminOrder> AdminOrders { get; set; }
     public DbSet<AdminProduct> AdminProducts { get; set; }
     public DbSet<AdminTransaction> AdminTransactions { get; set; }
-    public DbSet<AdminVendor> AdminVendorOrders { get; set; }
+    public DbSet<AdminVendor> AdminVendors { get; set; }
     public DbSet<AdminVendorConditions> AdminVendorConditions { get; set; }
+    public DbSet<AdminCategory> AdminCategories { get; set; }
+    public DbSet<Role> Roles {  get; set; }
+    public DbSet<ClaimAdmin> ClaimAdmins { get; set; }
+    public DbSet<ClaimRole> ClaimRoles { get; set; }
+    public DbSet<ClaimUser>ClaimUsers { get; set; }
+    public DbSet<ClaimVendor>ClaimVendors { get; set; }
+    public DbSet<CheckUserNameAndEmail>checkUserNameAndEmails { get; set; }
+    public DbSet<AdminAddress> AdminAddresses { get; set; }
+    public DbSet<VendorAddress> VendorAddresses { get; set; }
 
     public DbSet<Brand> Brands { get; set; }
     public DbSet<Cart> Carts { get; set; }
@@ -74,10 +87,10 @@ public partial class AppDbContext : IdentityDbContext<AppUser,RoleUser,int>
     public DbSet<VendorTransaction>VendorTransactions { get; set; }
     public DbSet<WishList> WishList { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        base.OnModelCreating(builder);
+        builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 
 }

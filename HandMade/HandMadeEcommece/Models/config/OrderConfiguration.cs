@@ -19,8 +19,6 @@ namespace HandMadeEcommece.Models.config
             builder.Property(e=>e.PaymentMethod).IsRequired().HasColumnType("VARCHAR").HasMaxLength(255);
             builder.Property(e => e.UpdatedAt).HasColumnType("DATETIME");
             builder.Property(e => e.OrderAddress).IsRequired().HasColumnType("VARCHAR").HasMaxLength(255);
-            builder.Property(e => e.ShoppingMethod).IsRequired().HasColumnType("VARCHAR").HasMaxLength(255);
-            builder.Property(e => e.PaymentStatus);
             //currency icon
 
             builder.HasOne(e => e.DeliveryCompany)
