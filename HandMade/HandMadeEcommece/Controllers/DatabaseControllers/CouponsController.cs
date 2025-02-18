@@ -18,7 +18,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             _Mapper = mapper;
         }
 
-        [HttpGet("GetCouponsAll")]
+        [HttpGet]
         public async Task<IActionResult> GetCouponsAll()
         {
             var Coupons = await Context.Coupons.ToListAsync();
@@ -26,21 +26,21 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             return Ok(Coupons);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetCoupon([FromQuery] List<int> ids)
-        {
-            if (ids == null) return BadRequest();
-            var coupons = new List<Coupon>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var coupon = await Context.Coupons.FindAsync(id);
-                if (coupon == null) continue;
-                coupons.Add(coupon);
-            }
-            if (coupons.Count == 0) return BadRequest();
-            return Ok(coupons);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetCoupon([FromQuery] List<int> ids)
+        //{
+        //    if (ids == null) return BadRequest();
+        //    var coupons = new List<Coupon>();
+        //    foreach (var id in ids)
+        //    {
+        //        if (id <= 0) continue;
+        //        var coupon = await Context.Coupons.FindAsync(id);
+        //        if (coupon == null) continue;
+        //        coupons.Add(coupon);
+        //    }
+        //    if (coupons.Count == 0) return BadRequest();
+        //    return Ok(coupons);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> CreateCoupon([FromBody] CouponDto couponDto)

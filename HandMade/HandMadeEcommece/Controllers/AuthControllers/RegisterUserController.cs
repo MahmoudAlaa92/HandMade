@@ -9,9 +9,11 @@ namespace HandMadeEcommece.Controllers.AuthControllers
     public class RegisterUserController : ControllerBase
     {
         private readonly IAuth _auth;
-        public RegisterUserController(IAuth auth)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public RegisterUserController(IAuth auth, IHttpContextAccessor contextAccessor)
         {
             _auth = auth;
+            _contextAccessor = contextAccessor;
         }
 
         [HttpPost("Register")]
@@ -19,8 +21,8 @@ namespace HandMadeEcommece.Controllers.AuthControllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
-            var result = await _auth.RegisterUserAsync(model);
+            var httpContext = _contextAccessor.HttpContext;
+            var result = await _auth.RegisterUserAsync(model,httpContext);
             if (!result.IsAuthenticated)
                 return BadRequest(result.Message);
 

@@ -18,7 +18,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             _Mapper = mapper;
         }
 
-        [HttpGet("GetPusherSettingsAll")]
+        [HttpGet]
         public async Task<IActionResult> GetPusherSettingsAll()
         {
             var pusherSettings = await Context.PusherSettings.ToListAsync();
@@ -26,21 +26,21 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             return Ok(pusherSettings);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetPusherSettings([FromQuery] List<int> ids)
-        {
-            if (ids == null) return BadRequest();
-            var pusherSettings = new List<PusherSetting>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var pusherSetting = await Context.PusherSettings.FindAsync(id);
-                if (pusherSetting == null) continue;
-                pusherSettings.Add(pusherSetting);
-            }
-            if (pusherSettings.Count == 0) return BadRequest();
-            return Ok(pusherSettings);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetPusherSettings([FromQuery] List<int> ids)
+        //{
+        //    if (ids == null) return BadRequest();
+        //    var pusherSettings = new List<PusherSetting>();
+        //    foreach (var id in ids)
+        //    {
+        //        if (id <= 0) continue;
+        //        var pusherSetting = await Context.PusherSettings.FindAsync(id);
+        //        if (pusherSetting == null) continue;
+        //        pusherSettings.Add(pusherSetting);
+        //    }
+        //    if (pusherSettings.Count == 0) return BadRequest();
+        //    return Ok(pusherSettings);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> CreatePusherSettings([FromForm] PusherSettingDto pusherSettingDto)

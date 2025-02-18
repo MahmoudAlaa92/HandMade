@@ -10,17 +10,19 @@ namespace HandMadeEcommece.Controllers.AuthControllers
     public class RegisterAdminsController : ControllerBase
     {
         private readonly IAuth _auth;
-        public RegisterAdminsController(IAuth auth)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public RegisterAdminsController(IAuth auth, IHttpContextAccessor contextAccessor)
         {
             _auth = auth;
+            _contextAccessor = contextAccessor;
         }
 
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAdminAsync([FromForm] RegisterAdminDto registerAdminDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            var admin = await _auth.RegisterAdminAsync(registerAdminDto);
+            var httpContext = _contextAccessor.HttpContext;
+            var admin = await _auth.RegisterAdminAsync(registerAdminDto,httpContext);
             if (!admin.IsAuthenticated)
                 return BadRequest(admin.Message);
             return Ok(admin);

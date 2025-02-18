@@ -17,7 +17,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             Context = _Context;
         }
 
-        [HttpGet("GetAdminOrdersAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAdminOrdersAll()
         {
             var AdminOrders = await Context.AdminOrders.ToListAsync();

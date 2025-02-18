@@ -14,7 +14,7 @@ namespace HandMadeEcommece.Models.Dto
 
         public IFormFile? Image {  get; set; }
 
-        public string Banner { get; set; } = null!;
+        public IFormFile? Banner { get; set; }
 
         public string Phone { get; set; } = null!;
 

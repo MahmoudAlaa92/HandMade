@@ -4,7 +4,7 @@
     {
         [Required]
         public string Name { get; set; } = null!;
-        [Required,JsonIgnore]
+        [Required]
 
 
         public string Code { get; set; } = null!;

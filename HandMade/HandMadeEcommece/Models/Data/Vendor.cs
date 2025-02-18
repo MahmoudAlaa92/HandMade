@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandMadeEcommece.Models.Data;
 
@@ -9,11 +10,12 @@ public class Vendor
 {
     public int Id { get; set; }
     public int RoleId {  get; set; }
-    public byte[]? Image { get; set; }
+    [Column(TypeName = "VARCHAR(255)")]
+    public string? Image { get; set; }
     public string FName { get; set; } = null!;
     public string LName { get; set; } = null!;
     public string UserName { get; set; } = null!;
-    public string Banner { get; set; } = null!;
+    public string? Banner { get; set; }
     public string Description { get; set; } = null!;
 
     public string Password { get; set; } = null!;

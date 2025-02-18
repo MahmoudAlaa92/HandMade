@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Net.Http;
 
 namespace HandMadeEcommece.Controllers.DatabaseControllers
 {
@@ -13,13 +14,17 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
     {
         private readonly IMapper _Mapper;
         private readonly AppDbContext Context;
-        public ProductsController(AppDbContext _Context, IMapper mapper)
+        private readonly IHttpContextAccessor _HttpContextAccessor;
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public ProductsController(AppDbContext _Context, IMapper mapper, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             Context = _Context;
             _Mapper = mapper;
+            _HttpContextAccessor = httpContextAccessor;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpGet("GetProductAll")]
+        [HttpGet]
         public async Task<IActionResult> GetProductAll()
         {
             var Products = await Context.Products.ToListAsync();
@@ -27,24 +32,24 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             return Ok(Products);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetProduct([FromQuery] List<int> ids)
-        {
-            if (ids == null) return BadRequest();
-            var products = new List<Product>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var product = await Context.Products.FindAsync(id);
-                if (product == null) continue;
-                products.Add(product);
-            }
-            if (products.Count == 0) return BadRequest();
-            return Ok(products);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetProduct([FromQuery] List<int> ids)
+        //{
+        //    if (ids == null) return BadRequest();
+        //    var products = new List<Product>();
+        //    foreach (var id in ids)
+        //    {
+        //        if (id <= 0) continue;
+        //        var product = await Context.Products.FindAsync(id);
+        //        if (product == null) continue;
+        //        products.Add(product);
+        //    }
+        //    if (products.Count == 0) return BadRequest();
+        //    return Ok(products);
+        //}
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] ProductDto productDto)// change fromForm to formbody
+        public async Task<IActionResult> CreateProduct([FromForm] ProductDto productDto)// change fromForm to formbody
         {
             if (!ModelState.IsValid || productDto == null||productDto.VendorId <= 0) return BadRequest();
             var vendor = await Context.Vendors.FindAsync(productDto.VendorId);
@@ -67,6 +72,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
                 var brand = await Context.Brands.FindAsync(productDto.BrandId);
                 if (brand == null) return BadRequest("This brand is not found");
             }
+            var httpContext = _HttpContextAccessor.HttpContext;
             var product = new Product
             {
                 Name = productDto.Name,
@@ -83,7 +89,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
                 Sku = productDto.Sku,
                 OfferPrice = productDto.OfferPrice,
                 Price = productDto.Price,
-                ThumbImage = await Methods.TransferImage(productDto.ThumbImage),
+                ThumbImage = await Methods.GetImagesFromPath(productDto.ThumbImage,"Products",httpContext,webHostEnvironment),
                 Slug = productDto.Slug,
                 Qty = productDto.Qty,
                 VendorId = productDto.VendorId,
@@ -123,7 +129,8 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             }
             var product = await Context.Products.FindAsync(id);
             if (product == null) return NotFound();
-            product.ThumbImage = await Methods.TransferImage(productDto.ThumbImage);
+            var httpContext = _HttpContextAccessor.HttpContext;
+            product.ThumbImage = await Methods.GetImagesFromPath(productDto.ThumbImage, "Products", httpContext,webHostEnvironment);
             product.UpdatedAt = DateTime.UtcNow;
             product.CreatedAt = productDto.CreatedAt;
             product = _Mapper.Map<Product>(productDto);

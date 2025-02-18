@@ -19,7 +19,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             _Mapper = mapper;
         }
 
-        [HttpGet("GetCartItemsAll")]
+        [HttpGet]
         public async Task<IActionResult> GetCartItemsAll()
         {
             var cartItems = await Context.CartItems.ToListAsync();
@@ -27,21 +27,21 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             return Ok(cartItems);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetCartItem([FromQuery] List<int> ids)
-        {
-            if (ids == null) return BadRequest();
-            var CartItems = new List<CartItem>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var CartItem = await Context.CartItems.FindAsync(id);
-                if (CartItem == null) continue;
-                CartItems.Add(CartItem);
-            }
-            if (CartItems.Count == 0) return BadRequest();
-            return Ok(CartItems);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetCartItem([FromQuery] List<int> ids)
+        //{
+        //    if (ids == null) return BadRequest();
+        //    var CartItems = new List<CartItem>();
+        //    foreach (var id in ids)
+        //    {
+        //        if (id <= 0) continue;
+        //        var CartItem = await Context.CartItems.FindAsync(id);
+        //        if (CartItem == null) continue;
+        //        CartItems.Add(CartItem);
+        //    }
+        //    if (CartItems.Count == 0) return BadRequest();
+        //    return Ok(CartItems);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> CreateCartItem([FromForm] CartItemDto cartItemDto)

@@ -1,6 +1,7 @@
 ﻿using HandMadeEcommece.Models.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandMadeEcommece.Models;
 
@@ -8,7 +9,8 @@ public class Brand
 {
     public int Id { get; set; }
 
-    public byte[] Logo { get; set; } = null!;
+    [Column(TypeName = "VARCHAR(255)")]
+    public string? Logo { get; set; } = null!;
 
     public string Name { get; set; } = null!;
 

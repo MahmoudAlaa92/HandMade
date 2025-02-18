@@ -11,9 +11,13 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
     public class DeliveryCompaniesController : ControllerBase
     {
         private readonly AppDbContext _Context;
-        public DeliveryCompaniesController(AppDbContext Context)
+        private readonly IHttpContextAccessor _HttpContextAccessor;
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public DeliveryCompaniesController(AppDbContext Context, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             _Context = Context;
+            _HttpContextAccessor = httpContextAccessor;
+            _WebHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -28,14 +32,14 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         public async Task<IActionResult> CreateDeliveryCompany([FromForm] DeliveryCompanyDto deliveryCompanyDto)
         {
             if (!ModelState.IsValid || deliveryCompanyDto == null) return BadRequest();
-
+            var httpContext = _HttpContextAccessor.HttpContext;
             var deliveryCompany = new DeliveryCompany
             {
                 Delivery_Zones = deliveryCompanyDto.Delivery_Zones,
                 Email = deliveryCompanyDto.Email,
                 Address = deliveryCompanyDto.Address,
                 IdTax = deliveryCompanyDto.IdTax,
-                Logo = await Methods.TransferImage(deliveryCompanyDto.Logo),
+                Logo = await Methods.GetImagesFromPath(deliveryCompanyDto.Logo,"Companies",httpContext,_WebHostEnvironment),
                 Name = deliveryCompanyDto.Name,
                 Pricing = deliveryCompanyDto.Pricing,
             };
@@ -53,12 +57,13 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
             var deliveryCompany = await _Context.DeliveryCompanies.FindAsync(id);
             if (deliveryCompany == null) return NotFound();
+            var httpContext = _HttpContextAccessor.HttpContext;
             deliveryCompany.Pricing = deliveryCompanyDto.Pricing;
             deliveryCompany.Delivery_Zones = deliveryCompanyDto.Delivery_Zones;
             deliveryCompany.Address = deliveryCompanyDto.Address;
             deliveryCompany.Email = deliveryCompanyDto.Email;
             deliveryCompany.Name = deliveryCompanyDto.Name;
-            deliveryCompany.Logo = await Methods.TransferImage(deliveryCompanyDto.Logo);
+            deliveryCompany.Logo = await Methods.GetImagesFromPath(deliveryCompanyDto.Logo,"Companies",httpContext,_WebHostEnvironment);
             deliveryCompany.IdTax = deliveryCompanyDto.IdTax;
             _Context.DeliveryCompanies.Update(deliveryCompany);
             await _Context.SaveChangesAsync();

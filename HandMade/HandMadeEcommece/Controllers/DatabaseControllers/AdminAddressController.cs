@@ -33,7 +33,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateAdminAddress([FromBody] AdminAddress userAddress)
+        public async Task<IActionResult> CreateAdminAddress([FromBody] AdminAddressDto userAddress)
         {
             if (!ModelState.IsValid)
             {
@@ -42,6 +42,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
             var ua = new AdminAddress
             {
+            
                 AdminId = userAddress.AdminId,
                 Country = userAddress.Country,
                 State = userAddress.State,
@@ -73,7 +74,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> UpdateAdminAddress(int id, [FromBody] AdminAddress userAddressDto)
         {
 

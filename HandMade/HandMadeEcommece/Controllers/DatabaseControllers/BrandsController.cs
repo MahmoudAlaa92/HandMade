@@ -13,13 +13,17 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
     {
         private readonly IMapper _Mapper;
         private readonly AppDbContext Context;
-        public BrandsController(AppDbContext _Context, IMapper mapper)
+        private readonly IHttpContextAccessor _HttpContextAccessor;
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+        public BrandsController(AppDbContext _Context, IMapper mapper, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             Context = _Context;
             _Mapper = mapper;
+            _HttpContextAccessor = httpContextAccessor;
+            _WebHostEnvironment = webHostEnvironment;
         }
 
-        [HttpGet("GetBrandsAll")]
+        [HttpGet]
         public async Task<IActionResult> GetBrandsAll()
         {
             var brands = await Context.Brands.ToListAsync();
@@ -27,21 +31,21 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             return Ok(brands);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetBrand([FromQuery] List<int> ids)
-        {
-            if (ids == null) return BadRequest();
-            var brands = new List<Brand>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var brand = await Context.Brands.FindAsync(id);
-                if (brand == null) continue;
-                brands.Add(brand);
-            }
-            if (brands.Count == 0) return BadRequest();
-            return Ok(brands);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetBrand([FromQuery] List<int> ids)
+        //{
+        //    if (ids == null) return BadRequest();
+        //    var brands = new List<Brand>();
+        //    foreach (var id in ids)
+        //    {
+        //        if (id <= 0) continue;
+        //        var brand = await Context.Brands.FindAsync(id);
+        //        if (brand == null) continue;
+        //        brands.Add(brand);
+        //    }
+        //    if (brands.Count == 0) return BadRequest();
+        //    return Ok(brands);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> CreateBrand([FromForm] BrandDto brandDto)
@@ -51,9 +55,10 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             {
                 return BadRequest("Invalid brand status.");
             }
+            var httpContext = _HttpContextAccessor.HttpContext;
             var brand = new Brand
             {
-                Logo = await Methods.TransferImage(brandDto.Logo),
+                Logo = await Methods.GetImagesFromPath(brandDto.Logo,"Brands",httpContext,_WebHostEnvironment),
                 Name = brandDto.Name,
                 Slug = brandDto.Slug,
                 Status = brandDto.Status.ToString(),
@@ -76,32 +81,28 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             }
             var brand = await Context.Brands.FindAsync(id);
             if (brand == null) return NotFound();
+            var httpContext = _HttpContextAccessor.HttpContext;
             brand.Name = brandDto.Name;
             brand.UpdatedAt = DateTime.UtcNow;
             brand.CreatedAt = brandDto.CreatedAt;
             brand.Status = brandDto.Status.ToString();
-            brand.Logo = await Methods.TransferImage(brandDto.Logo);
+            brand.Logo = await Methods.GetImagesFromPath(brandDto.Logo,"Brands",httpContext,_WebHostEnvironment);
+            brand.Slug = brandDto.Slug;
             Context.Brands.Update(brand);
             await Context.SaveChangesAsync();
             return Ok(brand);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteBrand([FromQuery] List<int> ids)
+        public async Task<IActionResult> DeleteBrand(int id)
         {
-            if (ids == null) return BadRequest();
-            var brands = new List<Brand>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var brand = await Context.Brands.FindAsync(id);
-                if (brand == null) continue;
-                Context.Brands.Remove(brand);
-                brands.Add(brand);
-            }
+            if (id <= 0) return BadRequest();
+           
+            var brand = await Context.Brands.FindAsync(id);
+            if (brand == null) return NotFound("This brand not found.");
+            Context.Brands.Remove(brand);
             await Context.SaveChangesAsync();
-            if (brands.Count == 0) return BadRequest();
-            return Ok(brands);
+            return Ok(brand);
         }
     }
 }

@@ -18,12 +18,16 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         private readonly AppDbContext Context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IAuth _auth;
-        public AdminsController(AppDbContext _Context, IMapper mapper, UserManager<AppUser> userManager, IAuth auth)
+        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public AdminsController(AppDbContext _Context, IMapper mapper, UserManager<AppUser> userManager, IAuth auth, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             Context = _Context;
             _Mapper = mapper;
             _userManager = userManager;
             _auth = auth;
+            _contextAccessor = httpContextAccessor;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -40,11 +44,12 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         {
             if (!ModelState.IsValid || id <= 0 || adminDto == null) return BadRequest();
             var admin = await Context.Admins.FindAsync(id);
+            var httpContext = _contextAccessor.HttpContext;
             if (admin == null) return NotFound();
-            if (admin.UserName != adminDto.UserName && await _userManager.FindByNameAsync(adminDto.UserName) != null) return BadRequest("The UserName Is Found");
+            if (admin.UserName != adminDto.UserName && await Context.Admins.FirstOrDefaultAsync(e=>e.UserName == adminDto.UserName && e.Email == admin.Email) != null) return BadRequest("The UserName Is Found");
             admin.UserName = adminDto.UserName;
             admin.Phone = adminDto.Phone;
-            admin.Image = await Methods.TransferImage(adminDto.image);
+            admin.Image = await Methods.GetImagesFromPath(adminDto.image,"Admins",httpContext,webHostEnvironment);
             admin.LName = adminDto.LName;
             admin.FName = adminDto.FName;
             admin.Salary = admin.Salary;

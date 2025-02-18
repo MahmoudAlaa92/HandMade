@@ -75,7 +75,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> UpdateUserAddress(int id, [FromBody] UserAddress userAddressDto)
         {
            

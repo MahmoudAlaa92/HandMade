@@ -9,6 +9,10 @@ using System.Security.Claims;
 using HandMadeEcommece.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using HandMadeEcommece.Models.Data;
+using Microsoft.AspNetCore.Http;
+using static System.Net.Mime.MediaTypeNames;
+using HandMadeEcommece.Models.Dto;
+using System.Numerics;
 
 
 
@@ -19,15 +23,19 @@ namespace HandMadeEcommece.Services
         private readonly UserManager<AppUser> _Manager;
         private readonly JWT _jwt;
         private readonly AppDbContext _Context;
-        public Auth(UserManager<AppUser> Manager, IOptions<JWT> jwt, AppDbContext Context)
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public Auth(UserManager<AppUser> Manager, IOptions<JWT> jwt, AppDbContext Context, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             _Manager = Manager;
             _jwt = jwt.Value;
             _Context = Context;
+            this.httpContextAccessor = httpContextAccessor;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
 
-        public async Task<AuthModel> RegisterUserAsync(RegisterUserModel Model)
+        public async Task<AuthModel> RegisterUserAsync(RegisterUserModel Model, HttpContext httpContext)
         {
 
             var checkEmail = await _Context.checkUserNameAndEmails.FirstOrDefaultAsync(e => e.Email == Model.Email);
@@ -36,9 +44,9 @@ namespace HandMadeEcommece.Services
             if (checkEmail != null) { return new AuthModel { Message = "This Email is already found" }; }
             if (checkUserName != null) { return new AuthModel { Message = "This UserName is already found" }; }
             if(Model.RoleId <= 0 ||await _Context.Roles.FirstOrDefaultAsync(e=>e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
-            if(await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
-            if(await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
-
+            if(!await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
+            if(!await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
+           // var httpContext = httpContextAccessor.HttpContext;
             var user = new User// change from appuser to user
             {
                 Email = Model.Email,
@@ -47,24 +55,9 @@ namespace HandMadeEcommece.Services
                 FName = Model.FName,
                 LName = Model.LName,
                 Password = Model.Password,
-                Image = await Methods.TransferImage(Model.Image),
+                Image = await Methods.GetImagesFromPath(Model.Image,"Users",httpContext,webHostEnvironment),
                 RoleId = Model.RoleId
             };
-
-
-            //var result =  await _Manager.CreateAsync(user, Model.Password);
-            // if (!result.Succeeded)
-            // {
-            //     var Error = "";
-            //     foreach (var error in result.Errors)
-            //     {
-            //         Error += $"{ error.Description},";
-            //     }
-            //      return  new AuthModel { Message = Error };  
-            // }
-
-
-
 
 
             await _Context.Users.AddAsync(user);
@@ -106,7 +99,7 @@ namespace HandMadeEcommece.Services
             return authModel;
         }
 
-        public async Task<AuthModel> RegisterAdminAsync(RegisterAdminDto Model)
+        public async Task<AuthModel> RegisterAdminAsync(RegisterAdminDto Model,HttpContext httpContext)
         {
 
             var checkEmail = await _Context.checkUserNameAndEmails.FirstOrDefaultAsync(e => e.Email == Model.Email);
@@ -115,8 +108,9 @@ namespace HandMadeEcommece.Services
             if (checkEmail != null) { return new AuthModel { Message = "This Email is already found" }; }
             if (checkUserName != null) { return new AuthModel { Message = "This UserName is already found" }; }
             if (Model.RoleId <= 0 || await _Context.Roles.FirstOrDefaultAsync(e => e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
-            if (await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
-            if (await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
+            if (!await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
+            if (!await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
+           // var httpContext = httpContextAccessor.HttpContext;
             var admin = new Admin
             {
                 UserName = Model.UserName,
@@ -126,21 +120,11 @@ namespace HandMadeEcommece.Services
                 FName = Model.FName,
                 Phone = Model.Phone,
                 Salary = Model.Salary,
-                Image = await Methods.TransferImage(Model.image),
+                Image  = await Methods.GetImagesFromPath(Model.image, "Admins", httpContext,webHostEnvironment),
                 RoleId = Model.RoleId
             };
 
-            //var result = await _Manager.CreateAsync(admin, Model.Password);
-            //if (!result.Succeeded)
-            //{
-            //    var Error = "";
-            //    foreach (var error in result.Errors)
-            //    {
-            //        Error += $"{error.Description},";
-            //    }
-            //    return new AuthModel { Message = Error };
-            //}
-
+      
 
 
             await _Context.Admins.AddAsync(admin);
@@ -185,7 +169,7 @@ namespace HandMadeEcommece.Services
 
         }
 
-        public async Task<AuthModel> RegisterVendorAsync(RegisterVendor Model)
+        public async Task<AuthModel> RegisterVendorAsync(RegisterVendor Model, HttpContext httpContext)
         {
             var checkEmail = await _Context.checkUserNameAndEmails.FirstOrDefaultAsync(e=>e.Email == Model.Email);
             var checkUserName = await _Context.checkUserNameAndEmails.FirstOrDefaultAsync(e=>e.UserName == Model.UserName);
@@ -193,8 +177,9 @@ namespace HandMadeEcommece.Services
             if (checkEmail != null) { return new AuthModel { Message = "This Email is already found" }; }
             if (checkUserName != null) { return new AuthModel { Message = "This UserName is already found" }; }
             if (Model.RoleId <= 0 || await _Context.Roles.FirstOrDefaultAsync(e => e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
-            if (await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
-            if (await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
+            if (!await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
+            if (!await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
+            // var httpContext = httpContextAccessor.HttpContext;
             var vendor = new Vendor
             {
                 Email = Model.Email,
@@ -202,25 +187,17 @@ namespace HandMadeEcommece.Services
                 UserName = Model.UserName,
                 FName = Model.FName,
                 LName = Model.LName,
-                Image = await Methods.TransferImage(Model.Image),
+                Image = await Methods.GetImagesFromPath(Model.Image, "Vendors", httpContext, webHostEnvironment),
                 RoleId = Model.RoleId,
                 FbLink = Model.FbLink,
                 InstaLink = Model.InstaLink,
                 TwLink = Model.TwLink,
                 Status = 1,
-                ShopName = Model.ShopName
+                ShopName = Model.ShopName,
+                Banner = await Methods.GetImagesFromPath(Model.Image, "VendorBanners", httpContext, webHostEnvironment),
+                Description = Model.Description,
+                Password = Model.Password
             };
-
-            //var result = await _Manager.CreateAsync(vendor, Model.Password);
-            //if (!result.Succeeded)
-            //{
-            //    var Error = "";
-            //    foreach (var error in result.Errors)
-            //    {
-            //        Error += $"{error.Description},";
-            //    }
-            //    return new AuthModel { Message = Error };
-            //}
 
 
 
@@ -288,17 +265,7 @@ namespace HandMadeEcommece.Services
             }
             if (ChangePassword.CurrentPassword != password) { return new ChangePasswordDto { Message = "The Password Is Wrong!!!" }; }
 
-           // var result = await _Manager.ChangePasswordAsync(user, ChangePassword.CurrentPassword, ChangePassword.NewPassword);
-
-            //var Error = "";
-            //if (!result.Succeeded)
-            //{
-            //    foreach(var error in result.Errors)
-            //    {
-            //        Error += $"{error},";
-            //    }
-            //    return new ChangePasswordDto { Message = Error };
-            //}
+           
 
             return new ChangePasswordDto
             {
@@ -310,6 +277,88 @@ namespace HandMadeEcommece.Services
             };
         }
     
+
+        public async Task<Order> ProcessOfOrder(Order order, OrderDto orderDto)
+        {
+            var carts = await _Context.Carts.Where(e => e.Order.CartId == orderDto.CartId).ToListAsync();
+            var cartItem = await _Context.CartItems.Where(e => e.CartId == orderDto.CartId).ToListAsync();
+
+            var Qty = cartItem.Sum(e => e.Quantity);
+
+
+
+
+            var products_id = await _Context.CartItems
+                .Include(e => e.productVariantItem)
+                .ThenInclude(pvi => pvi.ProductVariant)
+                .Where(e => e.CartId == orderDto.CartId)
+                .Select(e => new
+                {
+                    ProductId = e.productVariantItem.ProductVariant.ProductId
+                })
+                .ToListAsync();
+
+
+
+
+            var productIds = products_id.Select(e => e.ProductId).ToList();
+            var products = await _Context.Products.Where(e => productIds.Contains(e.Id)).ToListAsync();
+            var cartItems = await _Context.CartItems.Include(e => e.productVariantItem)
+                .ThenInclude(e => e.ProductVariant)
+                .Where(e => productIds.Contains(e.productVariantItem.ProductVariant.ProductId)).ToListAsync();
+
+            var vendorsIds = await _Context.Products.Select(e => e.VendorId).Distinct().ToListAsync();
+            var vendors = await _Context.Vendors.Where(e => vendorsIds.Contains(e.Id)).ToListAsync();
+            var updateProducts = new List<Product>();
+
+
+            foreach (var product in products)
+            {
+                var cartItemProduct = cartItems.FirstOrDefault(c => c.productVariantItem.ProductVariant.ProductId == product.Id);
+                if (cartItemProduct != null)
+                {
+                    product.Qty -= cartItemProduct.Quantity;
+                }
+
+                var add_product = new Product
+                {
+                    Id = product.Id,
+                    BrandId = product.BrandId,
+                    Price = product.Price,
+                    Qty = product.Qty,
+                    OfferEndDate = product.OfferEndDate,
+                    OfferStartDate = product.OfferStartDate,
+                    Name = product.Name,
+                    Slug = product.Slug,
+                    IsApproved = product.IsApproved,
+                };
+
+                updateProducts.Add(add_product);
+
+            }
+
+                _Context.Products.UpdateRange(updateProducts);
+                await _Context.SaveChangesAsync();
+
+
+                var amount = carts.Sum(e => e.TotalPrice);
+
+                order.CompanyDeliveryId = orderDto.CompanyDeliveryId;
+                order.Amount = amount;//calucalate coupon and discount
+                order.ProductQty = Qty;
+                order.OrderStatus = orderDto.OrderStatus.ToString();
+                order.CartId = orderDto.CartId;
+                order.UserId = orderDto.UserId;
+                order.CreatedAt = DateTime.UtcNow;
+                order.UpdatedAt = DateTime.UtcNow;
+                order.CurrencyName = orderDto.CurrencyName.ToString();
+                order.OrderAddress = orderDto.OrderAddress;
+                order.PaymentMethod = orderDto.PaymentMethod.ToString();
+                order.product = products;
+                order.vendor = vendors;
+
+                return order;
+        }
         private async Task<JwtSecurityToken> CreateJwtToken<TEntity>(TEntity entity) where TEntity : class
         {
             var ClaimsEntity = new List<Claim>();

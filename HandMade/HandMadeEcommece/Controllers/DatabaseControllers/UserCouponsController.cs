@@ -18,7 +18,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             _Mapper = mapper;
         }
 
-        [HttpGet("GetUserCouponsAll")]
+        [HttpGet]
         public async Task<IActionResult> GetUserCouponsAll()
         {
             var userCoupons = await Context.UserCoupons.ToListAsync();
@@ -26,24 +26,24 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             return Ok(userCoupons);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetUserCoupon([FromQuery] List<ValueTuple<int, int>> ids)
-        {
-            if (ids == null) return BadRequest();
-            var userCoupons = new List<UserCoupons>();
-            foreach (var id in ids)
-            {
-                if (id.Item1 <= 0 || id.Item2 <= 0) continue;
-                var coupon = await Context.Coupons.FindAsync(id.Item2);
-                var user = await Context.Users.FindAsync(id.Item1);
-                if (coupon == null || user == null) return BadRequest("Coupon Or User Is Null");
-                var userCoupon = await Context.UserCoupons.FindAsync(new { id.Item1, id.Item2 });
-                if (userCoupon == null) continue;
-                userCoupons.Add(userCoupon);
-            }
-            if (userCoupons.Count == 0) return BadRequest();
-            return Ok(userCoupons);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetUserCoupon([FromQuery] List<ValueTuple<int, int>> ids)
+        //{
+        //    if (ids == null) return BadRequest();
+        //    var userCoupons = new List<UserCoupons>();
+        //    foreach (var id in ids)
+        //    {
+        //        if (id.Item1 <= 0 || id.Item2 <= 0) continue;
+        //        var coupon = await Context.Coupons.FindAsync(id.Item2);
+        //        var user = await Context.Users.FindAsync(id.Item1);
+        //        if (coupon == null || user == null) return BadRequest("Coupon Or User Is Null");
+        //        var userCoupon = await Context.UserCoupons.FindAsync(new { id.Item1, id.Item2 });
+        //        if (userCoupon == null) continue;
+        //        userCoupons.Add(userCoupon);
+        //    }
+        //    if (userCoupons.Count == 0) return BadRequest();
+        //    return Ok(userCoupons);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> CreateUserCoupon([FromForm] UserCouponsDto userCouponDto)

@@ -7,6 +7,7 @@ global using Microsoft.EntityFrameworkCore;
 global using System.Net.Mail;
 global using PhoneNumbers;
 using System.Reflection.Metadata;
+using Azure.Core;
 
 
 
@@ -49,6 +50,24 @@ namespace HandMadeEcommece.helper
             {
                 return Task.FromResult(false);
             }
+        }
+
+        public static async Task<string> GetImagesFromPath(IFormFile image, string category,  HttpContext httpContext, IWebHostEnvironment webHostEnvironment)
+        {
+
+            if (image == null || image.Length == 0) { return "No file uploaded."; }
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath,"Images", category);
+            if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
+            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+           
+            using(var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await image.CopyToAsync(stream);
+            }
+
+            string url = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Images/{category}/{uniqueFileName}";
+            return url;
         }
       
     }

@@ -13,14 +13,11 @@ namespace HandMadeEcommece.Models.Dto
         [Required]
 
         public int UserId { get; set; }
-        [Required]
 
-        public decimal Amount { get; set; }// Amount from cart
         [Required]
 
         public CurrencyName CurrencyName { get; set; } = CurrencyName.EGP;
 
-        public int ProductQty { get; set; }// from cartId
         [Required]
 
         public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.Paypal;
@@ -34,10 +31,10 @@ namespace HandMadeEcommece.Models.Dto
 
         public DateTime? UpdatedAt { get; set; }
 
-        public DeliveryCompany? DeliveryCompany { get; set; } 
-        public User? user { get; set; }
-        public TransactionMoney? transactionMoney { get; set; }
-        public Cart? Cart { get; set; }
+        //public DeliveryCompany? DeliveryCompany { get; set; } 
+        //public User? user { get; set; }
+        //public TransactionMoney? transactionMoney { get; set; }
+        //public Cart? Cart { get; set; }
 
     }
 }

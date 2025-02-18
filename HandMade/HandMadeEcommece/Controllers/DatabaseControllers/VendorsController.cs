@@ -14,11 +14,15 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         private readonly IMapper _Mapper;
         private readonly AppDbContext Context;
         private readonly IAuth _auth;
-        public VendorsController(AppDbContext _Context, IMapper mapper, IAuth auth)
+        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public VendorsController(AppDbContext _Context, IMapper mapper, IAuth auth, IHttpContextAccessor contextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             Context = _Context;
             _Mapper = mapper;
             _auth = auth;
+            _contextAccessor = contextAccessor;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -37,9 +41,10 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             var vendor = await Context.Vendors.FindAsync(id);
             if (vendor == null) return NotFound();
             if (vendor.UserName != vendorDto.UserName && await Context.Vendors.FirstOrDefaultAsync(e=>e.UserName == vendorDto.UserName) != null) return BadRequest("The UserName Is Found");
+           var httpContext = _contextAccessor.HttpContext;
             vendor.UserName = vendorDto.UserName;
-             vendor.Phone = vendorDto.Phone;
-            vendor.Image = await Methods.TransferImage(vendorDto.Image);
+            vendor.Phone = vendorDto.Phone;
+            vendor.Image = await Methods.GetImagesFromPath(vendorDto.Image,"Vendors",httpContext,_webHostEnvironment);
             vendor.LName = vendorDto.LName;
             vendor.FName = vendorDto.FName;
             vendor.Description = vendorDto.Description;
@@ -48,7 +53,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             vendor.FbLink = vendorDto.FbLink;
             vendor.Status = vendorDto.Status;
             vendor.ShopName = vendorDto.ShopName;
-            vendor.Banner = vendorDto.Banner;
+            vendor.Banner = await Methods.GetImagesFromPath(vendorDto.Banner,"VendorBanners",httpContext,_webHostEnvironment);
 
             Context.Vendors.Update(vendor);
             await Context.SaveChangesAsync();

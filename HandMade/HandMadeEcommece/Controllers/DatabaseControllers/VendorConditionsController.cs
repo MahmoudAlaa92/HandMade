@@ -18,7 +18,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             _Mapper = mapper;
         }
 
-        [HttpGet("GetVendorConditionAll")]
+        [HttpGet]
         public async Task<IActionResult> GetVendorConditionAll()
         {
             var vendorConition = await Context.VendorConditions.ToListAsync();
@@ -26,21 +26,21 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             return Ok(vendorConition);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetVendorCondition([FromQuery] List<int> ids)
-        {
-            if (ids == null) return BadRequest();
-            var vendorConditions = new List<VendorCondition>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var vendorCondition = await Context.VendorConditions.FindAsync(id);
-                if (vendorCondition == null) continue;
-                vendorConditions.Add(vendorCondition);
-            }
-            if (vendorConditions.Count == 0) return BadRequest();
-            return Ok(vendorConditions);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetVendorCondition([FromQuery] List<int> ids)
+        //{
+        //    if (ids == null) return BadRequest();
+        //    var vendorConditions = new List<VendorCondition>();
+        //    foreach (var id in ids)
+        //    {
+        //        if (id <= 0) continue;
+        //        var vendorCondition = await Context.VendorConditions.FindAsync(id);
+        //        if (vendorCondition == null) continue;
+        //        vendorConditions.Add(vendorCondition);
+        //    }
+        //    if (vendorConditions.Count == 0) return BadRequest();
+        //    return Ok(vendorConditions);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> CreateVendorCondition([FromForm] VendorConditionDto vendorConditionDto)

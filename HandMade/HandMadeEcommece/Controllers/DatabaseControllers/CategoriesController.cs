@@ -12,13 +12,17 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
     {
         private readonly IMapper _Mapper;
         private readonly AppDbContext Context;
-        public CategoriesController(AppDbContext _Context, IMapper mapper)
+        private readonly IHttpContextAccessor _HttpContextAccessor;
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public CategoriesController(AppDbContext _Context, IMapper mapper, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             Context = _Context;
             _Mapper = mapper;
+            _HttpContextAccessor = httpContextAccessor;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpGet("GetCategoriesAll")]
+        [HttpGet]
         public async Task<IActionResult> GetCategoriesAll()
         {
             var Categories = await Context.Categories.ToListAsync();
@@ -26,29 +30,30 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             return Ok(Categories);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetCategory([FromQuery] List<int> ids)
-        {
-            if (ids == null) return BadRequest();
-            var categories = new List<Category>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var category = await Context.Categories.FindAsync(id);
-                if (category == null) continue;
-                categories.Add(category);
-            }
-            if (categories.Count == 0) return BadRequest();
-            return Ok(categories);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetCategory([FromQuery] List<int> ids)
+        //{
+        //    if (ids == null) return BadRequest();
+        //    var categories = new List<Category>();
+        //    foreach (var id in ids)
+        //    {
+        //        if (id <= 0) continue;
+        //        var category = await Context.Categories.FindAsync(id);
+        //        if (category == null) continue;
+        //        categories.Add(category);
+        //    }
+        //    if (categories.Count == 0) return BadRequest();
+        //    return Ok(categories);
+        //}
 
         [HttpPost]
-        public async Task<IActionResult> CreateCategory([FromBody] CategoryDto categoryDto)
+        public async Task<IActionResult> CreateCategory([FromForm] CategoryDto categoryDto)
         {
             if (categoryDto == null) return BadRequest();
+            var httpContext = _HttpContextAccessor.HttpContext;
             var category = new Category
             {
-                Icon = await Methods.TransferImage(categoryDto.Icon),
+                Icon = await Methods.GetImagesFromPath(categoryDto.Icon,"Categories",httpContext,webHostEnvironment),
                 Name = categoryDto.Name,
                 Slug = categoryDto.Slug,
                 Status = 1,
@@ -67,11 +72,12 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             if (id <= 0 || categoryDto == null) return BadRequest();
             var category = await Context.Categories.FindAsync(id);
             if (category == null) return NotFound();
+            var httpContext = _HttpContextAccessor.HttpContext;
             category.Name = categoryDto.Name;
             category.UpdatedAt = DateTime.UtcNow;
             category.CreatedAt = categoryDto.CreatedAt;
             category.Status = categoryDto.Status;
-            category.Icon = await Methods.TransferImage(categoryDto.Icon);
+            category.Icon = await Methods.GetImagesFromPath(categoryDto.Icon,"Categories",httpContext,webHostEnvironment);
             Context.Categories.Update(category);
             await Context.SaveChangesAsync();
             return Ok(category);

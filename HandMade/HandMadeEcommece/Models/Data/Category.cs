@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandMadeEcommece.Models.Data;
 
@@ -11,7 +12,8 @@ public class Category
 
     public string Slug { get; set; } = null!;
 
-    public byte[]? Icon { get; set; }
+    [Column(TypeName = "VARCHAR(255)")]
+    public string? Icon { get; set; }
 
     public int Status { get; set; }
 

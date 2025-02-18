@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandMadeEcommece.Models.Data;
 
@@ -10,8 +11,9 @@ public class Product
     public string Name { get; set; } = null!;
 
     public string Slug { get; set; } = null!;
-  
-    public byte[] ThumbImage { get; set; }
+
+    [Column(TypeName = "VARCHAR(255)")]
+    public string ThumbImage { get; set; }
 
     public int VendorId { get; set; }
 

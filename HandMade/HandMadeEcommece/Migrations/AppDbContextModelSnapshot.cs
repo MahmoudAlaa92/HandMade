@@ -33,9 +33,8 @@ namespace HandMadeEcommece.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("DATETIME");
 
-                    b.Property<byte[]>("Logo")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Logo")
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -77,8 +76,8 @@ namespace HandMadeEcommece.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Image")
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("LName")
                         .IsRequired()
@@ -336,8 +335,8 @@ namespace HandMadeEcommece.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("DATETIME");
 
-                    b.Property<byte[]>("Icon")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Icon")
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -400,9 +399,11 @@ namespace HandMadeEcommece.Migrations
             modelBuilder.Entity("HandMadeEcommece.Models.Data.CheckUserNameAndEmail", b =>
                 {
                     b.Property<string>("UserName")
+                        .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
                     b.Property<string>("Email")
+                        .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
                     b.HasKey("UserName", "Email");
@@ -632,9 +633,9 @@ namespace HandMadeEcommece.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<byte[]>("Logo")
+                    b.Property<string>("Logo")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -885,9 +886,9 @@ namespace HandMadeEcommece.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<byte[]>("ThumbImage")
+                    b.Property<string>("ThumbImage")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("DATETIME");
@@ -1241,8 +1242,8 @@ namespace HandMadeEcommece.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Image")
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("LName")
                         .IsRequired()
@@ -1353,7 +1354,6 @@ namespace HandMadeEcommece.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Banner")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
@@ -1375,8 +1375,8 @@ namespace HandMadeEcommece.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Image")
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("InstaLink")
                         .HasMaxLength(255)

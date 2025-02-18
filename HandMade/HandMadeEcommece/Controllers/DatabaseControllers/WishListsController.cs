@@ -18,7 +18,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         }
 
 
-        [HttpGet("id")]
+        [HttpGet]
         public async Task<IActionResult> GetAllListOfUser([FromQuery] int id)
         {
 

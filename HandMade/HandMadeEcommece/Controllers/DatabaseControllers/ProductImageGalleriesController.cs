@@ -13,14 +13,16 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ProductImageGalleriesController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
+        private readonly IHttpContextAccessor httpContextAccessor;
+        public ProductImageGalleriesController(AppDbContext context, IWebHostEnvironment webHostEnvironment,IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
 
-        [HttpPost("upload")]
+        [HttpPost]
         public async Task<IActionResult> UploadProduct([FromForm] ProductImageGalleryDto productImageGalleryDto)
         {
             if (productImageGalleryDto.Image == null || productImageGalleryDto.Image.Length == 0)
@@ -29,22 +31,13 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             var product = await _context.Products.FindAsync(productImageGalleryDto.ProductId);
             if (product == null) return BadRequest("This product is not found");
 
-            var uploadsFolder = Path.Combine(_webHostEnvironment.ContentRootPath, "wwwroot/images/productsImgs");
-
-
-            var filePath = Path.Combine(uploadsFolder, productImageGalleryDto.Image.FileName);
-
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await productImageGalleryDto.Image.CopyToAsync(stream);
-            }
+            var httpContext = httpContextAccessor.HttpContext;
 
             var productImageGallery = new ProductImageGallery
             {
                 ProductId = productImageGalleryDto.ProductId,
                 CreatedAt = DateTime.Now,
-                Image = ($"/images/{productImageGalleryDto.Image.FileName}")
+                Image = await Methods.GetImagesFromPath(productImageGalleryDto.Image, "ProductImagesGallery", httpContext, _webHostEnvironment)
             };
 
             await _context.ProductImageGalleries.AddAsync(productImageGallery);
@@ -56,32 +49,10 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
 
 
-        [HttpGet("Product id")]
-        public async Task<IActionResult> GetProduct([FromQuery] int prodId)//int id
-        {
-            var product = await _context.ProductImageGalleries.ToListAsync();
 
 
 
-
-            product = await _context.ProductImageGalleries.Where(p => p.ProductId == prodId)
-              .ToListAsync();
-
-            if (product.IsNullOrEmpty())
-                return NotFound("Product img not found.");
-
-            foreach (var p in product)
-            {
-                if (!string.IsNullOrEmpty(p.Image))
-                {
-                    p.Image = $"{Request.Scheme}://{Request.Host}/{p.Image}";
-                }
-            }
-            return Ok(product);
-        }
-
-
-        [HttpGet("All")]
+        [HttpGet]
         public async Task<IActionResult> GetALLProduct()
         {
             var product = await _context.ProductImageGalleries.ToListAsync();
@@ -89,15 +60,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             if (product.IsNullOrEmpty())
                 return NotFound("Product img not found.");
 
-            foreach (var p in product)
-            {
-                if (!string.IsNullOrEmpty(p.Image))
-                {
-                    p.Image = $"{Request.Scheme}://{Request.Host}/{p.Image}";
-                }
-                else
-                    p.Image = "Product img not found.";
-            }
+           
             return Ok(product);
         }
 
@@ -111,7 +74,6 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
             if (product.IsNullOrEmpty())
                 return NotFound("Product img not found.");
-
 
 
             _context.ProductImageGalleries.RemoveRange(product);
