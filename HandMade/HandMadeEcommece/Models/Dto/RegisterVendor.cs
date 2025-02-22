@@ -15,7 +15,7 @@
         [Required, MaxLength(15)]
         public string Phone {  get; set; }
 
-        public IFormFile? Image { get; set; }
+        public string? Image { get; set; }
         [Required]
 
         public string Banner { get; set; } = null!;
@@ -27,9 +27,6 @@
         [Required,MaxLength(255)]
 
         public string Description { get; set; } = null!;
-
-        [Required]
-        public int RoleId {  get; set; }
 
         public string? FbLink { get; set; }
 

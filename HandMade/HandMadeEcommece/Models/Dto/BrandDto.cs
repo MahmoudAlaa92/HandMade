@@ -3,7 +3,7 @@
     public class BrandDto
     {
         [Required]
-        public IFormFile Logo { get; set; } = null!;
+        public string Logo { get; set; } = null!;
         [Required]
 
         public string Name { get; set; } = null!;

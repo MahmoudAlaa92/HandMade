@@ -32,7 +32,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddnewProduct([FromForm] WishListDto wishListDto)
+        public async Task<IActionResult> AddnewProduct([FromBody] WishListDto wishListDto)
         {
             if (!ModelState.IsValid || wishListDto == null || wishListDto.ProductId <= 0 || wishListDto.UserId <= 0) return BadRequest();
             bool userExists = await _context.Users.AnyAsync(w => w.Id == wishListDto.UserId);

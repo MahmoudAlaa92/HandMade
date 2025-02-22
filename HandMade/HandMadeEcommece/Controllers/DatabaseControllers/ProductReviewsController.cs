@@ -29,7 +29,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddproductRev([FromForm]ProductReviewDto dto)
+        public async Task<IActionResult> AddproductRev([FromBody]ProductReviewDto dto)
 
         {
 

@@ -5,7 +5,7 @@
         [Required]
         public int CartId { get; set; }
         [Required]
-        public int Product_Variant_Item_Id { get; set; }
+        public int ProductId { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]

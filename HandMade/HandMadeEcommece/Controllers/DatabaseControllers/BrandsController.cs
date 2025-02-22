@@ -48,7 +48,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> CreateBrand([FromForm] BrandDto brandDto)
+        public async Task<IActionResult> CreateBrand([FromBody] BrandDto brandDto)
         {
             if (!ModelState.IsValid || brandDto == null) return BadRequest();
             if (!Enum.IsDefined(typeof(BrandStatus), brandDto.Status))
@@ -58,7 +58,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             var httpContext = _HttpContextAccessor.HttpContext;
             var brand = new Brand
             {
-                Logo = await Methods.GetImagesFromPath(brandDto.Logo,"Brands",httpContext,_WebHostEnvironment),
+                Logo = brandDto.Logo,
                 Name = brandDto.Name,
                 Slug = brandDto.Slug,
                 Status = brandDto.Status.ToString(),
@@ -86,7 +86,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             brand.UpdatedAt = DateTime.UtcNow;
             brand.CreatedAt = brandDto.CreatedAt;
             brand.Status = brandDto.Status.ToString();
-            brand.Logo = await Methods.GetImagesFromPath(brandDto.Logo,"Brands",httpContext,_WebHostEnvironment);
+            brand.Logo = brandDto.Logo;
             brand.Slug = brandDto.Slug;
             Context.Brands.Update(brand);
             await Context.SaveChangesAsync();

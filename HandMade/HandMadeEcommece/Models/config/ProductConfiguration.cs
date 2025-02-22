@@ -29,9 +29,9 @@ namespace HandMadeEcommece.Models.config
             builder.Property(x => x.CreatedAt).HasColumnType("DATETIME");
             builder.Property(x => x.UpdatedAt).HasColumnType("DATETIME");
 
-            builder.HasOne(e => e.ChildCategory)
-                .WithMany(e => e.products)
-                .HasForeignKey(e => e.ChildCategoryId)
+            builder.HasOne(e => e.Category)
+                .WithMany(e => e.Products)
+                .HasForeignKey(e => e.CategoryId)
                 .IsRequired(false);
 
             builder.HasOne(e => e.Brand)

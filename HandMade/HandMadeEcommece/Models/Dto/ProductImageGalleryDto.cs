@@ -5,7 +5,7 @@ namespace HandMadeEcommece.Models.Dto
     public class ProductImageGalleryDto
     {
         [Required]
-        public IFormFile Image { get; set; }
+        public string Image { get; set; }
         [Required]
 
         public int ProductId { get; set; }

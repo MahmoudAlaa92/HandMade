@@ -8,7 +8,7 @@
 
         public string Slug { get; set; } = null!;
 
-        public IFormFile? Icon { get; set; }
+        public string? Icon { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 
         public int Status { get; set; }

@@ -47,13 +47,13 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> CreateCategory([FromForm] CategoryDto categoryDto)
+        public async Task<IActionResult> CreateCategory([FromBody] CategoryDto categoryDto)
         {
             if (categoryDto == null) return BadRequest();
             var httpContext = _HttpContextAccessor.HttpContext;
             var category = new Category
             {
-                Icon = await Methods.GetImagesFromPath(categoryDto.Icon,"Categories",httpContext,webHostEnvironment),
+                Icon = categoryDto.Icon,
                 Name = categoryDto.Name,
                 Slug = categoryDto.Slug,
                 Status = 1,
@@ -77,28 +77,21 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             category.UpdatedAt = DateTime.UtcNow;
             category.CreatedAt = categoryDto.CreatedAt;
             category.Status = categoryDto.Status;
-            category.Icon = await Methods.GetImagesFromPath(categoryDto.Icon,"Categories",httpContext,webHostEnvironment);
+            category.Icon = categoryDto.Icon;
             Context.Categories.Update(category);
             await Context.SaveChangesAsync();
             return Ok(category);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteCategory([FromQuery] List<int> ids)
+        public async Task<IActionResult> DeleteCategory(int id)
         {
-            if (ids == null) return BadRequest();
-            var categories = new List<Category>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var category = await Context.Categories.FindAsync(id);
-                if (category == null) continue;
-                Context.Categories.Remove(category);
-                categories.Add(category);
-            }
+            if (id <= 0) return BadRequest();
+            var category = await Context.Categories.FindAsync(id);
+            if (category == null) return NotFound();
+            Context.Categories.Remove(category);
             await Context.SaveChangesAsync();
-            if (categories.Count == 0) return BadRequest();
-            return Ok(categories);
+            return Ok(category);
         }
     }
 }

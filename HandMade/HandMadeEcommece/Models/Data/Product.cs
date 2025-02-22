@@ -17,8 +17,8 @@ public class Product
 
     public int VendorId { get; set; }
 
-    public int? ChildCategoryId { get; set; }
-
+    //public int? ChildCategoryId { get; set; }
+    public int? CategoryId { get; set; }
     public int? BrandId { get; set; }
     public int? CouponId {  get; set; }
 
@@ -52,9 +52,10 @@ public class Product
 
     public Brand Brand { get; set; } = null!;
     public Category Category { get; set; } = null!;
-    public ChildCategory ChildCategory { get; set; } = null!;
+    //public ChildCategory ChildCategory { get; set; } = null!;
     public Coupon Coupon { get; set; } = null!;
-    public ICollection<ProductVariant> ProductVariants { get; set; } = new List<ProductVariant>();
+   // public ICollection<ProductVariant> ProductVariants { get; set; } = new List<ProductVariant>();
+   public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
     public ICollection<ProductImageGallery> ProductImagesGallery { get; set; } = new List<ProductImageGallery>();
     public ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();
     public ICollection<WishList> WishList { get; set; } = new List<WishList>();

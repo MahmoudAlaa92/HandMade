@@ -16,9 +16,7 @@
         public string Email { get; set; }
         [Required, StringLength(15)]
         public string Phone { get; set; }
-        [Required]
-        public int RoleId {  get; set; }
-        public IFormFile? Image { get; set; }
+        public string? Image { get; set; }
 
     }
 }

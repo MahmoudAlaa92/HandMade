@@ -49,28 +49,25 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromForm] ProductDto productDto)// change fromForm to formbody
+        public async Task<IActionResult> CreateProduct([FromBody] ProductDto productDto)// change fromForm to formbody
         {
-            if (!ModelState.IsValid || productDto == null||productDto.VendorId <= 0) return BadRequest();
+            if (!ModelState.IsValid || productDto == null || productDto.VendorId <= 0 || productDto.CouponId < 0 || productDto.BrandId < 0 || productDto.CategoryId < 0) return BadRequest();
             var vendor = await Context.Vendors.FindAsync(productDto.VendorId);
             if (vendor == null) return BadRequest("This vendor is not found");
             if (productDto == null) return BadRequest();
-            if (productDto.CouponId.HasValue)
+            if (await Context.Coupons.FindAsync(productDto.CouponId) == null)
             {
-                var coupon  = await Context.Coupons.FindAsync(productDto.CouponId);
-                if (coupon == null) return BadRequest("This coupon is not found");
+                productDto.CouponId = null;
             }
 
-            if (productDto.ChildCategoryId.HasValue)
+            if (await Context.Categories.FindAsync(productDto.CategoryId) == null)
             {
-                var child = await Context.ChildCategories.FindAsync(productDto.ChildCategoryId);
-                if (child == null) return BadRequest("This ChildCategory is not found");
+               productDto.CategoryId = null;
             }
 
-            if (productDto.BrandId.HasValue)
+            if (await Context.Brands.FindAsync(productDto.BrandId) == null)
             {
-                var brand = await Context.Brands.FindAsync(productDto.BrandId);
-                if (brand == null) return BadRequest("This brand is not found");
+                productDto.BrandId = null;
             }
             var httpContext = _HttpContextAccessor.HttpContext;
             var product = new Product
@@ -80,7 +77,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
                 OfferEndDate = productDto.OfferEndDate,
                 OfferStartDate = productDto.OfferStartDate,
                 BrandId = productDto.BrandId,
-                ChildCategoryId = productDto.ChildCategoryId,
+               CategoryId = productDto.CategoryId,
                 ShortDescription = productDto.ShortDescription,
                 SeoDescription = productDto.SeoDescription,
                 CouponId = productDto.CouponId,
@@ -89,7 +86,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
                 Sku = productDto.Sku,
                 OfferPrice = productDto.OfferPrice,
                 Price = productDto.Price,
-                ThumbImage = await Methods.GetImagesFromPath(productDto.ThumbImage,"Products",httpContext,webHostEnvironment),
+                ThumbImage = productDto.ThumbImage,
                 Slug = productDto.Slug,
                 Qty = productDto.Qty,
                 VendorId = productDto.VendorId,
@@ -104,33 +101,30 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)
+        public async Task<IActionResult> UpdateProduct(int id, [FromForm] ProductDto productDto)
         {
-            if (!ModelState.IsValid || productDto == null || productDto.VendorId <= 0) return BadRequest();
+            if (!ModelState.IsValid || productDto == null || productDto.VendorId <= 0 || productDto.CouponId < 0 || productDto.BrandId < 0 || productDto.CategoryId < 0) return BadRequest();
             var vendor = await Context.Vendors.FindAsync(productDto.VendorId);
             if (vendor == null) return BadRequest("This vendor is not found");
             if (productDto == null) return BadRequest();
-            if (productDto.CouponId.HasValue)
+            if (await Context.Coupons.FindAsync(productDto.CouponId) == null)
             {
-                var coupon = await Context.Coupons.FindAsync(productDto.CouponId);
-                if (coupon == null) return BadRequest("This coupon is not found");
+                productDto.CouponId = null;
             }
 
-            if (productDto.ChildCategoryId.HasValue)
+            if (await Context.Categories.FindAsync(productDto.CategoryId) == null)
             {
-                var child = await Context.ChildCategories.FindAsync(productDto.ChildCategoryId);
-                if (child == null) return BadRequest("This ChildCategory is not found");
+                productDto.CategoryId = null;
             }
 
-            if (productDto.BrandId.HasValue)
+            if (await Context.Brands.FindAsync(productDto.BrandId) == null)
             {
-                var brand = await Context.Brands.FindAsync(productDto.BrandId);
-                if (brand == null) return BadRequest("This brand is not found");
+                productDto.BrandId = null;
             }
             var product = await Context.Products.FindAsync(id);
             if (product == null) return NotFound();
             var httpContext = _HttpContextAccessor.HttpContext;
-            product.ThumbImage = await Methods.GetImagesFromPath(productDto.ThumbImage, "Products", httpContext,webHostEnvironment);
+            product.ThumbImage = productDto.ThumbImage;
             product.UpdatedAt = DateTime.UtcNow;
             product.CreatedAt = productDto.CreatedAt;
             product = _Mapper.Map<Product>(productDto);
@@ -140,21 +134,14 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteProduct([FromQuery] List<int> ids)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            if (ids == null) return BadRequest();
-            var products = new List<Product>();
-            foreach (var id in ids)
-            {
-                if (id <= 0) continue;
-                var product = await Context.Products.FindAsync(id);
-                if (product == null) continue;
-                Context.Products.Remove(product);
-                products.Add(product);
-            }
+            if (id <= 0) return BadRequest();
+            var product = await Context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+            Context.Products.Remove(product);
             await Context.SaveChangesAsync();
-            if (products.Count == 0) return BadRequest();
-            return Ok(products);
+            return Ok(product);
         }
     }
 }

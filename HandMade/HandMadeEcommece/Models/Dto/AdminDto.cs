@@ -8,7 +8,7 @@
 
         public string UserName { get; set; }
 
-        public IFormFile? image { get; set; }
+        public string image { get; set; }
 
         public string? Phone { get; set; }
         [Required]

@@ -44,7 +44,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> CreateCartItem([FromForm] CartItemDto cartItemDto)
+        public async Task<IActionResult> CreateCartItem([FromBody] CartItemDto cartItemDto)
         {
             if (!ModelState.IsValid || cartItemDto == null) return BadRequest();
 
@@ -52,7 +52,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             {
                 CartId = cartItemDto.CartId,
                 Price = cartItemDto.Price,
-                Product_Variant_Item_Id = cartItemDto.Product_Variant_Item_Id,
+                ProductId = cartItemDto.ProductId,
                 Quantity = cartItemDto.Quantity,
                 SubTotal = cartItemDto.Price * cartItemDto.Quantity
             };
@@ -71,7 +71,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             cartItem.Price = cartItemDto.Price;
             cartItem.Quantity = cartItemDto.Quantity;
             cartItem.CartId = cartItemDto.CartId;
-            cartItem.Product_Variant_Item_Id = cartItemDto.Product_Variant_Item_Id;
+            cartItem.ProductId = cartItemDto.ProductId;
             cartItem.SubTotal = cartItemDto.Price * cartItemDto.Quantity;
             Context.CartItems.Update(cartItem);
             await Context.SaveChangesAsync();

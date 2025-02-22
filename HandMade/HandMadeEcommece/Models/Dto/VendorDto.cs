@@ -12,9 +12,9 @@ namespace HandMadeEcommece.Models.Dto
 
         public string UserName {  get; set; }
 
-        public IFormFile? Image {  get; set; }
+        public string? Image {  get; set; }
 
-        public IFormFile? Banner { get; set; }
+        public string? Banner { get; set; }
 
         public string Phone { get; set; } = null!;
 

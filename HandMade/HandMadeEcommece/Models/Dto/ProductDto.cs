@@ -11,17 +11,17 @@ namespace HandMadeEcommece.Models.Dto
         public string Slug { get; set; } = null!;
         [Required]
 
-        public IFormFile ThumbImage { get; set; }
+        public string ThumbImage { get; set; }
         [Required] //must be required 
 
         public int VendorId { get; set; }
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
 
-        public int? ChildCategoryId { get; set; }
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public int? CategoryId { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
 
         public int? BrandId { get; set; }
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
 
         public int? CouponId { get; set; }
         [Required]

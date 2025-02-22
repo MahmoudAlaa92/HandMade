@@ -15,6 +15,6 @@
         [Required]
         public string IdTax { get; set; } = null!;
         [Required]
-        public IFormFile Logo { get; set; } = null!;
+        public string Logo { get; set; } = null!;
     }
 }

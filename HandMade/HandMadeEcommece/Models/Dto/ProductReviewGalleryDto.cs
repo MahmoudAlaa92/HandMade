@@ -6,7 +6,7 @@
         public int ProductReviewId { get; set; }
 
         [Required]
-        public IFormFile Image { get; set; }
+        public string Image { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

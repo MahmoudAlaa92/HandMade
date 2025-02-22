@@ -35,7 +35,7 @@ namespace HandMadeEcommece.Controllers.ModelsControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrder([FromForm] OrderDto orderDto)
+        public async Task<IActionResult> CreateOrder([FromBody] OrderDto orderDto)
         {
             if (!ModelState.IsValid || orderDto == null) return BadRequest();
             var order = new Order();
@@ -60,19 +60,14 @@ namespace HandMadeEcommece.Controllers.ModelsControllers
 
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteOrder([FromQuery] List<int> ids)
+        public async Task<IActionResult> DeleteOrder(int id)
         {
-            if (ids == null || ids.Count <= 0) return BadRequest();
-            var ordes = new List<Order>();
-            foreach (var id in ids)
-            {
-                var order = await _Context.Orders.FindAsync(id);
-                if (order == null) continue;
-                _Context.Orders.Remove(order);
-            }
+            if (id <= 0) return BadRequest();
+            var order = await _Context.Orders.FindAsync(id);
+            if (order == null) return NotFound();
+            _Context.Orders.Remove(order);
             await _Context.SaveChangesAsync();
-            if (ordes.Count == 0) return NotFound();
-            return Ok(ordes);
+            return Ok(order);
         }
 
     }

@@ -4,9 +4,7 @@ namespace HandMadeEcommece.Models.Dto
 {
     public class RegisterAdminDto
     {
-        [Required]
-        public int RoleId { get; set; }
-        public IFormFile? image { get; set; }
+        public string? image { get; set; }
         [Required]
         public string FName { get; set; }
         [Required]

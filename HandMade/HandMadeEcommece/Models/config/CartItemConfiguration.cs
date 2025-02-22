@@ -19,9 +19,9 @@ namespace HandMadeEcommece.Models.config
                 .HasForeignKey(e => e.CartId)
                 .IsRequired(false);
 
-            builder.HasOne(e => e.productVariantItem)
+            builder.HasOne(e => e.product)
                .WithMany(e => e.CartItems)
-               .HasForeignKey(e => e.Product_Variant_Item_Id)
+               .HasForeignKey(e => e.ProductId)
                .IsRequired(false);
         }
     }

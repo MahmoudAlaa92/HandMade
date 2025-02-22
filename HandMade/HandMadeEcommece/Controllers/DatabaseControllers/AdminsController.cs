@@ -49,7 +49,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             if (admin.UserName != adminDto.UserName && await Context.Admins.FirstOrDefaultAsync(e=>e.UserName == adminDto.UserName && e.Email == admin.Email) != null) return BadRequest("The UserName Is Found");
             admin.UserName = adminDto.UserName;
             admin.Phone = adminDto.Phone;
-            admin.Image = await Methods.GetImagesFromPath(adminDto.image,"Admins",httpContext,webHostEnvironment);
+            admin.Image = adminDto.image;
             admin.LName = adminDto.LName;
             admin.FName = adminDto.FName;
             admin.Salary = admin.Salary;

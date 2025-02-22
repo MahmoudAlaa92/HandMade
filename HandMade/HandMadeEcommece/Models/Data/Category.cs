@@ -21,7 +21,8 @@ public class Category
 
     public DateTime? UpdatedAt { get; set; }
 
-    public ICollection<SubCategory> SubCategories { get; set; } = new List<SubCategory>();
+    //public ICollection<SubCategory> SubCategories { get; set; } = new List<SubCategory>();
+    public ICollection<Product> Products { get; set; } = new List<Product>();
     public ICollection<Admin>admins { get; set; } = new List<Admin>();  
     public ICollection<AdminCategory> categories { get; set; } = new List<AdminCategory>();
 }

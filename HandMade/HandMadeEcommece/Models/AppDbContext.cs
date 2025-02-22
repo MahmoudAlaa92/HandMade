@@ -43,7 +43,7 @@ public class AppDbContext : DbContext
 
     public DbSet<Chat> Chats { get; set; }
 
-    public DbSet<ChildCategory> ChildCategories { get; set; }
+   // public DbSet<ChildCategory> ChildCategories { get; set; }
 
     public DbSet<Coupon> Coupons { get; set; }
     public DbSet<DeliveryCompany>DeliveryCompanies { get; set; }
@@ -65,13 +65,13 @@ public class AppDbContext : DbContext
 
     public DbSet<ProductReviewGallery> ProductReviewGalleries { get; set; }
 
-    public DbSet<ProductVariant> ProductVariants { get; set; }
+   // public DbSet<ProductVariant> ProductVariants { get; set; }
 
-    public DbSet<ProductVariantItem> ProductVariantItems { get; set; }
+//    public DbSet<ProductVariantItem> ProductVariantItems { get; set; }
 
     public DbSet<PusherSetting> PusherSettings { get; set; }
 
-    public DbSet<SubCategory> SubCategories { get; set; }
+   // public DbSet<SubCategory> SubCategories { get; set; }
 
     public DbSet<TransactionMoney> Transactions { get; set; }
 

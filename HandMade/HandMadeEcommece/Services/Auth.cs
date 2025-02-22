@@ -43,7 +43,7 @@ namespace HandMadeEcommece.Services
 
             if (checkEmail != null) { return new AuthModel { Message = "This Email is already found" }; }
             if (checkUserName != null) { return new AuthModel { Message = "This UserName is already found" }; }
-            if(Model.RoleId <= 0 ||await _Context.Roles.FirstOrDefaultAsync(e=>e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
+            //if(Model.RoleId <= 0 ||await _Context.Roles.FirstOrDefaultAsync(e=>e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
             if(!await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
             if(!await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
            // var httpContext = httpContextAccessor.HttpContext;
@@ -55,8 +55,8 @@ namespace HandMadeEcommece.Services
                 FName = Model.FName,
                 LName = Model.LName,
                 Password = Model.Password,
-                Image = await Methods.GetImagesFromPath(Model.Image,"Users",httpContext,webHostEnvironment),
-                RoleId = Model.RoleId
+                Image = Model.Image,
+                RoleId = 1
             };
 
 
@@ -107,7 +107,7 @@ namespace HandMadeEcommece.Services
 
             if (checkEmail != null) { return new AuthModel { Message = "This Email is already found" }; }
             if (checkUserName != null) { return new AuthModel { Message = "This UserName is already found" }; }
-            if (Model.RoleId <= 0 || await _Context.Roles.FirstOrDefaultAsync(e => e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
+           // if (Model.RoleId <= 0 || await _Context.Roles.FirstOrDefaultAsync(e => e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
             if (!await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
             if (!await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
            // var httpContext = httpContextAccessor.HttpContext;
@@ -120,8 +120,8 @@ namespace HandMadeEcommece.Services
                 FName = Model.FName,
                 Phone = Model.Phone,
                 Salary = Model.Salary,
-                Image  = await Methods.GetImagesFromPath(Model.image, "Admins", httpContext,webHostEnvironment),
-                RoleId = Model.RoleId
+                Image  = Model.image,
+                RoleId = 3
             };
 
       
@@ -176,7 +176,7 @@ namespace HandMadeEcommece.Services
 
             if (checkEmail != null) { return new AuthModel { Message = "This Email is already found" }; }
             if (checkUserName != null) { return new AuthModel { Message = "This UserName is already found" }; }
-            if (Model.RoleId <= 0 || await _Context.Roles.FirstOrDefaultAsync(e => e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
+           // if (Model.RoleId <= 0 || await _Context.Roles.FirstOrDefaultAsync(e => e.Id == Model.RoleId) == null) { return new AuthModel { Message = "This Role Is Not Found" }; }
             if (!await Methods.IsValidEmail(Model.Email)) { return new AuthModel { Message = "This Email is not valid," }; }
             if (!await Methods.IsValidPhone(Model.Phone)) { return new AuthModel { Message = "This Phone is not valid in egypt." }; }
             // var httpContext = httpContextAccessor.HttpContext;
@@ -187,14 +187,14 @@ namespace HandMadeEcommece.Services
                 UserName = Model.UserName,
                 FName = Model.FName,
                 LName = Model.LName,
-                Image = await Methods.GetImagesFromPath(Model.Image, "Vendors", httpContext, webHostEnvironment),
-                RoleId = Model.RoleId,
+                Image = Model.Image,
+                RoleId = 2,
                 FbLink = Model.FbLink,
                 InstaLink = Model.InstaLink,
                 TwLink = Model.TwLink,
                 Status = 1,
                 ShopName = Model.ShopName,
-                Banner = await Methods.GetImagesFromPath(Model.Image, "VendorBanners", httpContext, webHostEnvironment),
+                Banner = Model.Image,
                 Description = Model.Description,
                 Password = Model.Password
             };
@@ -288,24 +288,21 @@ namespace HandMadeEcommece.Services
 
 
 
-            var products_id = await _Context.CartItems
-                .Include(e => e.productVariantItem)
-                .ThenInclude(pvi => pvi.ProductVariant)
-                .Where(e => e.CartId == orderDto.CartId)
-                .Select(e => new
-                {
-                    ProductId = e.productVariantItem.ProductVariant.ProductId
-                })
-                .ToListAsync();
+            //var products_id = await _Context.CartItems
+            //    .Include(e=>e.product)
+            //    .Select(e => new
+            //    {
+            //       e.ProductId
+            //    })
+            //    .ToListAsync();
 
 
 
 
-            var productIds = products_id.Select(e => e.ProductId).ToList();
+            var productIds =  cartItem.Select(e => e.ProductId).ToList();
             var products = await _Context.Products.Where(e => productIds.Contains(e.Id)).ToListAsync();
-            var cartItems = await _Context.CartItems.Include(e => e.productVariantItem)
-                .ThenInclude(e => e.ProductVariant)
-                .Where(e => productIds.Contains(e.productVariantItem.ProductVariant.ProductId)).ToListAsync();
+            //var cartItems = await _Context.CartItems.Include(e => e.product)
+            //    .Where(e => productIds.Contains(e.ProductId)).ToListAsync();
 
             var vendorsIds = await _Context.Products.Select(e => e.VendorId).Distinct().ToListAsync();
             var vendors = await _Context.Vendors.Where(e => vendorsIds.Contains(e.Id)).ToListAsync();
@@ -314,7 +311,7 @@ namespace HandMadeEcommece.Services
 
             foreach (var product in products)
             {
-                var cartItemProduct = cartItems.FirstOrDefault(c => c.productVariantItem.ProductVariant.ProductId == product.Id);
+                var cartItemProduct = cartItem.FirstOrDefault(c => c.ProductId == product.Id);
                 if (cartItemProduct != null)
                 {
                     product.Qty -= cartItemProduct.Quantity;

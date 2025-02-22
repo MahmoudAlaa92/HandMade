@@ -23,7 +23,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
 
         [HttpPost]
-        public async Task<IActionResult> UploadProduct([FromForm] ProductImageGalleryDto productImageGalleryDto)
+        public async Task<IActionResult> UploadProduct([FromBody] ProductImageGalleryDto productImageGalleryDto)
         {
             if (productImageGalleryDto.Image == null || productImageGalleryDto.Image.Length == 0)
                 return BadRequest("No image uploaded.");
@@ -37,7 +37,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             {
                 ProductId = productImageGalleryDto.ProductId,
                 CreatedAt = DateTime.Now,
-                Image = await Methods.GetImagesFromPath(productImageGalleryDto.Image, "ProductImagesGallery", httpContext, _webHostEnvironment)
+                Image = productImageGalleryDto.Image
             };
 
             await _context.ProductImageGalleries.AddAsync(productImageGallery);

@@ -44,7 +44,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
            var httpContext = _contextAccessor.HttpContext;
             vendor.UserName = vendorDto.UserName;
             vendor.Phone = vendorDto.Phone;
-            vendor.Image = await Methods.GetImagesFromPath(vendorDto.Image,"Vendors",httpContext,_webHostEnvironment);
+            vendor.Image = vendorDto.Image;
             vendor.LName = vendorDto.LName;
             vendor.FName = vendorDto.FName;
             vendor.Description = vendorDto.Description;
@@ -53,7 +53,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             vendor.FbLink = vendorDto.FbLink;
             vendor.Status = vendorDto.Status;
             vendor.ShopName = vendorDto.ShopName;
-            vendor.Banner = await Methods.GetImagesFromPath(vendorDto.Banner,"VendorBanners",httpContext,_webHostEnvironment);
+            vendor.Banner = vendorDto.Banner;
 
             Context.Vendors.Update(vendor);
             await Context.SaveChangesAsync();

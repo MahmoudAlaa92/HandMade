@@ -29,7 +29,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDeliveryCompany([FromForm] DeliveryCompanyDto deliveryCompanyDto)
+        public async Task<IActionResult> CreateDeliveryCompany([FromBody] DeliveryCompanyDto deliveryCompanyDto)
         {
             if (!ModelState.IsValid || deliveryCompanyDto == null) return BadRequest();
             var httpContext = _HttpContextAccessor.HttpContext;
@@ -39,7 +39,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
                 Email = deliveryCompanyDto.Email,
                 Address = deliveryCompanyDto.Address,
                 IdTax = deliveryCompanyDto.IdTax,
-                Logo = await Methods.GetImagesFromPath(deliveryCompanyDto.Logo,"Companies",httpContext,_WebHostEnvironment),
+                Logo = deliveryCompanyDto.Logo,
                 Name = deliveryCompanyDto.Name,
                 Pricing = deliveryCompanyDto.Pricing,
             };
@@ -63,7 +63,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             deliveryCompany.Address = deliveryCompanyDto.Address;
             deliveryCompany.Email = deliveryCompanyDto.Email;
             deliveryCompany.Name = deliveryCompanyDto.Name;
-            deliveryCompany.Logo = await Methods.GetImagesFromPath(deliveryCompanyDto.Logo,"Companies",httpContext,_WebHostEnvironment);
+            deliveryCompany.Logo = deliveryCompanyDto.Logo;
             deliveryCompany.IdTax = deliveryCompanyDto.IdTax;
             _Context.DeliveryCompanies.Update(deliveryCompany);
             await _Context.SaveChangesAsync();
@@ -72,19 +72,14 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
 
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteDeliveryCompany([FromQuery] List<int> ids)
+        public async Task<IActionResult> DeleteDeliveryCompany(int id)
         {
-            if (ids == null || ids.Count <= 0) return BadRequest();
-            var deliveryCompanies = new List<DeliveryCompany>();
-            foreach (var id in ids)
-            {
-                var deliveryCompany = await _Context.DeliveryCompanies.FindAsync(id);
-                if (deliveryCompany == null) continue;
-                _Context.DeliveryCompanies.Remove(deliveryCompany);
-            }
+            if (id <= 0) return BadRequest();
+            var deliveryCompany = await _Context.DeliveryCompanies.FindAsync(id);
+            if (deliveryCompany == null) return NotFound();
+            _Context.DeliveryCompanies.Remove(deliveryCompany);
             await _Context.SaveChangesAsync();
-            if (deliveryCompanies.Count == 0) return NotFound();
-            return Ok(deliveryCompanies);
+            return Ok(deliveryCompany);
         }
     }
 }

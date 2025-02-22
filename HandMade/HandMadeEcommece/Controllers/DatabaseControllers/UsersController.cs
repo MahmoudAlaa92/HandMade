@@ -66,7 +66,7 @@ namespace HandMadeEcommece.Controllers.DatabaseControllers
             var httpContext = httpContextAccessor.HttpContext;
             user.UserName = userDto.UserName;
             user.Phone = userDto.Phone;
-            user.Image = await Methods.GetImagesFromPath(userDto.image,"Users",httpContext,webHostEnvironment);
+            user.Image = userDto.image;
             user.LName = userDto.LName;
             user.FName = userDto.FName;
             Context.Users.Update(user);
